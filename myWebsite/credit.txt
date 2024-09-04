@@ -1,0 +1,71 @@
+// credit to how-can-i-get-an-elements-id-value-with-javascript,
+// on StackOverflow, Kamil Kiełczewski for passing variable and how to use "this", imhvost for idea of id.id
+// W3 schools: onclick Event, HTML <script> src Attribute, HTML Tables, JavaScript For Loops
+// how to map, Stackoverflow: how-is-a-javascript-hash-map-implemented?
+// how to map, Stackoverflow: /are-there-dictionaries-in-javascript-like-python?
+// W3 schools: JavaScript Number toString(), JavaScript Random
+// Stackoverflow: whats-the-best-way-to-break-from-nested-loops-in-javascript
+//   thanks to all in this forum especially swilliams and CloudyMarble for saying to just use a function/return
+//   ^^^^this is used when ai has to use the else statement
+// How to connect css file, thanks to W3 schools: "HTML Styles - CSS"
+// got helped on how to align the tic tac toe grid with W3 schools: CSS Layout - Horizontal & Vertical Align
+//! Got help to create html elements with W3 schools: "JavaScript HTML DOM Elements (Nodes)"
+// how to add img and src, how to add src with javascript, S.O.: Adding images to an HTML document with JavaScript
+//!!lot a help with overlaying the strike png
+    //S.O.: How do I position one image on top of another in HTML?
+    //S.O.: How to let an HTML image overlap another
+    //! explained more well -> Youtube: How To Overlay One Div Over Another Div or Image Using HTML & CSS by Ali Hossain
+    // How to rotate img -> W3 Schools: CSS transform Property
+    // How to resize img => S.O.: Resize image proportionally with CSS? [duplicate]
+    // How to resize img -> W3 Schools: Responsive Web Design - Images
+    // The video in this article has a very good explaination on how z-index works, helped me understand it more.
+        //CSS Z-Index Not Working? How to Fix It Using Stack Order by Cem Eygi from freeCodeCamp
+        // video: CSS Z Index Property: What is CSS Z-Index, Stacking Order, and Why Your Z-Index Is Not Working? by Cem Eygi Media
+    // more z index help/understanding
+        //S.O.: Why does z-index not work?
+        //S.O.: How to make child element higher z-index than parent? [duplicate]
+            // more specifc on how child and parent are related in z-index
+
+// Deep Copys and Shallow copies, learned how to use spread operator
+    // YT: "How To Make a DEEP Copy in JavaScript (No Libraries and No Hacks!)" by James Q Quick
+    // YT: "Javascript Array and Object Cloning: Shallow or Deep?" by Jack Herrington
+    // S.O: "How do you clone an array of objects in JavaScript?"
+    // YT: "Copying Arrays (deep and shallow) - Beau teaches JavaScript" by freeCodeCamp.org
+    // YT: "JavaScript Copy Array: How to make an exact copy of an array in JavaScript" by Code With Bubb 
+    // YT: "The Best Way to Deep Copy Objects or Arrays in JavaScript - structuredClone()" by dcode
+    // W3 schools: "JavaScript Array splice()"
+    // W3 schools: "How TO - The Spread Operator (...)"
+    // W3 schools: "React ES6 Spread Operator"
+// How to append array
+    // S.O.: "How to append something to an array?"
+// ?? and || operators
+    // S.O.: "What is the Javascript equivalent of Python's get method for dictionaries"
+    // YT: Nullish Coalescing Operator - JavaScript Tutorial" by dcode
+//Sets
+    //W3 schools: "JavaScript Sets"
+    //S.O.: How to delete an object from a Set in JavaScript
+    //GeeksforGeeks: JavaScript Set delete() Method
+    //S.O.: Iterate over set elements
+        // thanks to Vasanth for explaining how to use the spread operator for sets
+    // S.O.: Delete an array element in Set in Javascript
+//Dictionaries/Objects:
+    // S.O.: How can I get a collection of keys in a JavaScript dictionary? [duplicate]
+    // S.O.: How do I remove a key from a JavaScript object? [duplicate]
+//How to add image to td element:
+    // GeeksforGeeks: How to Add Image inside Table Cell in HTML ?
+//Removing elements from array/splice function
+    // YT: How to remove an element from an array with JavaScript by Web Dev with Matt
+// easier way to traverse through a 2d array and Set. Set rules.
+    // S.O.: Storing arrays in ES6 Set and accessing them by value
+        // Alexander O'Mara -> saw how he used for(let a of set)
+// How to add onclick function to new html element:
+    // S.O.: Add onclick event to newly added element in JavaScript
+/////////////////modal////////////////
+//"Build a Popup With JavaScript" by Web Dev Simplified, Youtube
+
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+CSS
+/* S.O.: Change TD border color with HTML or CSS
+        For border collapse @ table and border code @ td*/
