@@ -74,10 +74,12 @@ gameBoxes.forEach(box => {
     box.addEventListener('click', ()=> {
         overlay.classList.add("active")
 
-        makeTac()
-        gameExitBox.appendChild(tactable)
+        if(box.id == "game1"){
+            makeTac()
+            gameExitBox.appendChild(tactable)
+            tactable.classList.add("active")
+        }
 
-        tactable.classList.add("active")
         gameExitBox.classList.add("active")
     })
 });
