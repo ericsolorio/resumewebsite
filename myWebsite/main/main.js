@@ -1,3 +1,56 @@
+/*
+<body>
+    <canvas id = "gameScreen" width="650" height="650"></canvas>
+    <img id = "img_player" src= "images/player.png">
+    <img id = "img_playerBullet" src = "/images/playerBullet.png">
+    <img id = "img_enemy" src = "images/enemy.png">
+    <img id = "img_enemyBullet" src="images/enemyBullet.png">
+</body>
+*/
+
+siBox = null
+function makeSI(){
+
+    //Google AI says canvas needs to be loaded first
+    // before javascript code
+    // so the current code can work
+
+    // siBox = document.createElement("canvas")
+    // siBox.id = "gameScreen"
+    // siBox.width = "650"
+    // siBox.height = "650"
+
+    let img0 = document.createElement("img")
+    let img1 = document.createElement("img")
+    let img2 = document.createElement("img")
+    let img3 = document.createElement("img")
+
+    img0.id = "img_player"
+    img0.src = "spaceInvaders/images/player.png"
+    img1.id = "img_playerBullet"
+    img1.src = "spaceInvaders/images/playerBullet.png"
+    img2.id = "img_enemy"
+    img2.src = "spaceInvaders/images/enemy.png"
+    img3.id = "img_enemyBullet"
+    img3.src = "spaceInvaders/images/enemyBullet.png"
+
+    document.body.append(img0,img1,img2,img3)
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Mr. Polywhirl @ S.O.: "Append multiple items in JavaScript"
     //can use append() with spread operator -> bar.append(...[])
 
@@ -76,7 +129,8 @@ gameBoxes.forEach(box => {
             tactable.classList.add("active")
         }
         if(box.id == "game2"){
-            
+            makeSI()
+            gameExitBox.append(siBox)
         }
 
         gameExitBox.classList.add("active")
