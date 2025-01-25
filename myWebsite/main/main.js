@@ -1,29 +1,23 @@
-/*
-<body>
-    <canvas id = "gameScreen" width="650" height="650"></canvas>
-    <img id = "img_player" src= "images/player.png">
-    <img id = "img_playerBullet" src = "/images/playerBullet.png">
-    <img id = "img_enemy" src = "images/enemy.png">
-    <img id = "img_enemyBullet" src="images/enemyBullet.png">
-</body>
-*/
-
-siBox = null
-function makeSI(){
-
-    //Google AI says canvas needs to be loaded first
+//Google AI says canvas needs to be loaded first
     // before javascript code
     // so the current code can work
 
-    // siBox = document.createElement("canvas")
-    // siBox.id = "gameScreen"
-    // siBox.width = "650"
-    // siBox.height = "650"
 
-    let img0 = document.createElement("img")
-    let img1 = document.createElement("img")
-    let img2 = document.createElement("img")
-    let img3 = document.createElement("img")
+const CANVAS  = document.querySelector("canvas")
+const gameExitBox = document.querySelector(".gameExitBox")
+let img0 = null
+let img1 = null
+let img2 = null
+let img3 = null
+
+function makeSI(){
+    CANVAS.width = "650"
+    CANVAS.height = "650"
+
+    img0 = document.createElement("img")
+    img1 = document.createElement("img")
+    img2 = document.createElement("img")
+    img3 = document.createElement("img")
 
     img0.id = "img_player"
     img0.src = "spaceInvaders/images/player.png"
@@ -35,6 +29,7 @@ function makeSI(){
     img3.src = "spaceInvaders/images/enemyBullet.png"
 
     document.body.append(img0,img1,img2,img3)
+    gameExitBox.append(CANVAS)
     
 }
 
@@ -113,7 +108,6 @@ function makeTac(){
 
 const gameBoxes = document.querySelectorAll(".GamesTableBox")
 const overlay = document.querySelector(".Overlay");
-const gameExitBox = document.querySelector(".gameExitBox")
 const exitButton = document.querySelector("#exitButton")
 
 // const tacBoxes = document.querySelectorAll(".")
@@ -122,6 +116,7 @@ const exitButton = document.querySelector("#exitButton")
 gameBoxes.forEach(box => {
     box.addEventListener('click', ()=> {
         overlay.classList.add("active")
+        gameExitBox.classList.add("active")
 
         if(box.id == "game1"){
             makeTac()
@@ -130,10 +125,10 @@ gameBoxes.forEach(box => {
         }
         if(box.id == "game2"){
             makeSI()
-            gameExitBox.append(siBox)
+            gameExitBox.classList.add("si")
         }
 
-        gameExitBox.classList.add("active")
+        
     })
 });
 
@@ -153,6 +148,13 @@ function closeGame(){
         tactable.classList.remove("active")
         gameExitBox.removeChild(tactable)
         tactable = null
+    }
+    if(gameExitBox.hasChildNodes(CANVAS)){
+        document.body.removeChild(img0)
+        document.body.removeChild(img1)
+        document.body.removeChild(img2)
+        document.body.removeChild(img3)
+        gameExitBox.removeChild(CANVAS)
     }
     
 }

@@ -13,9 +13,7 @@ import LaunchPad from "./launchPad.js"
 // MY GAME IS DEFINITLY INSPIRED/INFLUENCED
 // BY THE TUTURIOL VIDEO
 
-console.log("what")
 let launchPad = new LaunchPad()
-console.log("how about here")
 
 let lastTime = 0;
 

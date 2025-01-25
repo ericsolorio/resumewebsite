@@ -32,6 +32,11 @@
 .gameExitBox.active{
     transform: translate(-50%,-50%) scale(1);
 }
+.gameExitBox.active.si{
+    width: 650;
+    height: 690;
+    transform: translate(-50%,-50%) scale(1);
+}
 .gameExitBox #exitButton{
     width: 20px;
     height: 20px;
