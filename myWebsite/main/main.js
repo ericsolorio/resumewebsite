@@ -36,16 +36,6 @@ function makeSI(){
 
 
 
-
-
-
-
-
-
-
-
-
-
 //Mr. Polywhirl @ S.O.: "Append multiple items in JavaScript"
     //can use append() with spread operator -> bar.append(...[])
 
@@ -149,12 +139,12 @@ function closeGame(){
         gameExitBox.removeChild(tactable)
         tactable = null
     }
-    if(gameExitBox.hasChildNodes(CANVAS)){
-        document.body.removeChild(img0)
-        document.body.removeChild(img1)
-        document.body.removeChild(img2)
-        document.body.removeChild(img3)
-        gameExitBox.removeChild(CANVAS)
-    }
+    // if(gameExitBox.hasChildNodes(CANVAS)){
+    //     document.body.removeChild(img0)
+    //     document.body.removeChild(img1)
+    //     document.body.removeChild(img2)
+    //     document.body.removeChild(img3)
+    //     gameExitBox.removeChild(CANVAS)
+    // }
     
 }
