@@ -2,8 +2,6 @@
     // before javascript code
     // so the current code can work
 
-
-const CANVAS  = document.querySelector("canvas")
 const gameExitBox = document.querySelector(".gameExitBox")
 let img0 = null
 let img1 = null
@@ -11,8 +9,15 @@ let img2 = null
 let img3 = null
 
 function makeSI(){
-    CANVAS.width = "650"
-    CANVAS.height = "650"
+    let canvas = document.createElement("canvas")
+    canvas.id = "gameScreen"
+    canvas.width = "650"
+    canvas.height = "650"
+
+    let siScript = document.createElement("script")
+    siScript.id = "siSCript"
+    siScript.type = "module"
+    siScript.src = "spaceInvaders/src/index.js"
 
     img0 = document.createElement("img")
     img1 = document.createElement("img")
@@ -21,15 +26,20 @@ function makeSI(){
 
     img0.id = "img_player"
     img0.src = "spaceInvaders/images/player.png"
+    img0.classList.add("siImg")
     img1.id = "img_playerBullet"
     img1.src = "spaceInvaders/images/playerBullet.png"
+    img1.classList.add("siImg")
     img2.id = "img_enemy"
     img2.src = "spaceInvaders/images/enemy.png"
+    img2.classList.add("siImg")
     img3.id = "img_enemyBullet"
     img3.src = "spaceInvaders/images/enemyBullet.png"
+    img3.classList.add("siImg")
 
+    document.head.append(siScript)
     document.body.append(img0,img1,img2,img3)
-    gameExitBox.append(CANVAS)
+    gameExitBox.append(canvas)
     
 }
 
@@ -139,12 +149,22 @@ function closeGame(){
         gameExitBox.removeChild(tactable)
         tactable = null
     }
-    // if(gameExitBox.hasChildNodes(CANVAS)){
-    //     document.body.removeChild(img0)
-    //     document.body.removeChild(img1)
-    //     document.body.removeChild(img2)
-    //     document.body.removeChild(img3)
-    //     gameExitBox.removeChild(CANVAS)
-    // }
+
+    // influences & inspired from https://stackoverflow.com/questions/73354312/how-can-i-detect-if-a-parent-element-has-a-specific-child-element-with-javascrip 
+    // from Stack Overflow
+    // Forum: how can i detect if a parent element has a specific child element with javascript?
+    // Shai said that I can use getElementById
+    // I used querySelector
+    if(document.querySelector("canvas")){
+        let noway = document.querySelector("canvas")
+        gameExitBox.removeChild(noway)
+        let nowaypt2 = document.querySelector("#siScript")
+        document.head.removeChild(nowaypt2)
+        
+        document.body.removeChild(img0)
+        document.body.removeChild(img1)
+        document.body.removeChild(img2)
+        document.body.removeChild(img3)
+    }
     
 }

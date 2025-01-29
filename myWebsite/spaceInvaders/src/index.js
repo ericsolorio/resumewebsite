@@ -17,6 +17,8 @@ let launchPad = new LaunchPad()
 
 let lastTime = 0;
 
+console.log("how about this?")
+
 function gameLoop(timestamp){
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp
