@@ -3,6 +3,8 @@
     // so the current code can work
 
 export let isLPActive = false;
+import * as tac from "../tictactoe/tictactoe.js";
+console.log(tac)
 
 const gameExitBox = document.querySelector(".gameExitBox")
 let img0 = null
@@ -67,7 +69,7 @@ function makeTac(){
     tr0.append(box0,box1,box2)
     tr0.childNodes.forEach(box => {
         box.addEventListener("click", ()=>{
-            boxClick(box)
+            tac.boxClick(box)
         })
     })
     
@@ -81,7 +83,7 @@ function makeTac(){
     tr1.append(box3,box4,box5)
     tr1.childNodes.forEach(box => {
         box.addEventListener("click", ()=>{
-            boxClick(box)
+            tac.boxClick(box)
         })
     })
 
@@ -95,7 +97,7 @@ function makeTac(){
     tr2.append(box6,box7,box8)
     tr2.childNodes.forEach(box =>{
         box.addEventListener("click",()=>{
-            boxClick(box)
+            tac.boxClick(box)
         })
     })
 
@@ -132,7 +134,6 @@ gameBoxes.forEach(box => {
             gameExitBox.classList.add("si")
         }
 
-        
     })
 });
 
@@ -149,9 +150,11 @@ function closeGame(){
     overlay.classList.remove("active")
     gameExitBox.classList.remove("active")
     if(tactable != null){
+        tac.wipeGame()
         tactable.classList.remove("active")
         gameExitBox.removeChild(tactable)
         tactable = null
+        
     }
 
     // influenced & inspired from https://stackoverflow.com/questions/73354312/how-can-i-detect-if-a-parent-element-has-a-specific-child-element-with-javascrip 

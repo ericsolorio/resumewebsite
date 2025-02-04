@@ -1,3 +1,5 @@
+export * from "../tictactoe/tictactoe.js"
+
 //letter and enemyletter get changed throughout the game
 let letter = 'X';
 
@@ -221,7 +223,7 @@ function diagnolRCheck()
     // W3 schools: HTML DOM Element remove()
     // S.O.: How to remove all elements of a certain class from the DOM?
         // thanks to Paul for the idea to index at [0]
-function wipeGame()
+export function wipeGame()
 {
     let xHtmlList = document.getElementsByClassName("x");
     let oHtmlList = document.getElementsByClassName("circle");
@@ -267,7 +269,9 @@ function wipeGame()
         tie = false;
     }
 
-    document.getElementById("retry").remove();
+    if(document.querySelector("#retry")){
+        document.getElementById("retry").remove();
+    }
 }
 
 function tieCheck()
@@ -362,9 +366,9 @@ function someAI()
     }
 }
 
-function boxClick(box)
+export function boxClick(box)
 {
-    boxID = box.id
+    let boxID = box.id
     boxID = boxID.toString()
     console.log(boxID.toString())
     let row = map2[boxID][0]
