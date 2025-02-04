@@ -2,11 +2,14 @@
     // before javascript code
     // so the current code can work
 
+export let isLPActive = false;
+
 const gameExitBox = document.querySelector(".gameExitBox")
 let img0 = null
 let img1 = null
 let img2 = null
 let img3 = null
+
 
 function makeSI(){
     let canvas = document.createElement("canvas")
@@ -49,7 +52,7 @@ function makeSI(){
 //Mr. Polywhirl @ S.O.: "Append multiple items in JavaScript"
     //can use append() with spread operator -> bar.append(...[])
 
-tactable = null
+let tactable = null
 function makeTac(){
     tactable = document.createElement("table")
     tactable.classList.add("tactable")
@@ -125,6 +128,7 @@ gameBoxes.forEach(box => {
         }
         if(box.id == "game2"){
             makeSI()
+            isLPActive = true
             gameExitBox.classList.add("si")
         }
 
@@ -150,7 +154,7 @@ function closeGame(){
         tactable = null
     }
 
-    // influences & inspired from https://stackoverflow.com/questions/73354312/how-can-i-detect-if-a-parent-element-has-a-specific-child-element-with-javascrip 
+    // influenced & inspired from https://stackoverflow.com/questions/73354312/how-can-i-detect-if-a-parent-element-has-a-specific-child-element-with-javascrip 
     // from Stack Overflow
     // Forum: how can i detect if a parent element has a specific child element with javascript?
     // Shai said that I can use getElementById
@@ -161,6 +165,8 @@ function closeGame(){
         let nowaypt2 = document.querySelector("#siScript")
         document.head.removeChild(nowaypt2)
         
+        isLPActive = false
+
         document.body.removeChild(img0)
         document.body.removeChild(img1)
         document.body.removeChild(img2)

@@ -1,4 +1,5 @@
 import LaunchPad from "./launchPad.js"
+import { isLPActive } from "../../main/main.js";
 
 // this is the MAIN FILE
 // THE MAIN LOOP
@@ -13,11 +14,15 @@ import LaunchPad from "./launchPad.js"
 // MY GAME IS DEFINITLY INSPIRED/INFLUENCED
 // BY THE TUTURIOL VIDEO
 
-let launchPad = new LaunchPad()
+
+
+//let launchPad = new LaunchPad()
+let launchPad = null
+
+let counter = 0;
 
 let lastTime = 0;
 
-console.log("how about this?")
 
 function gameLoop(timestamp){
     let deltaTime = timestamp - lastTime;
@@ -25,10 +30,46 @@ function gameLoop(timestamp){
 
     // LaunchPad is where the swithces scenerios,
         // menu, game, victory, gameover
-    launchPad.update(deltaTime)
+
+    // launchPad.update(deltaTime)
+
+    console.log(isLPActive)
+
+
+    if(isLPActive){
+        if(counter == 0){
+            launchPad = new LaunchPad()
+            counter++;
+        }
+        launchPad.update(deltaTime)
+    }
+    else{
+        if(counter == 1){
+            launchPad = null
+            counter = 0
+        }
+    }
 
     requestAnimationFrame(gameLoop)
 }
 
 
 requestAnimationFrame(gameLoop)
+
+
+
+//if (isActive){
+    //if(counter == 0){
+    //  lanchPad = new()
+        // counter++
+    //}
+    //lauchPad.update(deltaTime)
+//}else{
+//  if(counter == 1){
+        //launchPad = null
+        //counter = 0
+//}
+    
+//}
+
+
