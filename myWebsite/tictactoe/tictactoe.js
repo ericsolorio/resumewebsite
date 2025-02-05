@@ -30,7 +30,7 @@ function retryButton()
 {
     let img2 = document.createElement("img");
     img2.id = "retry";
-    img2.src = "images/retry.png";
+    img2.src = "tictactoe/images/retry.png";
     img2.onclick = function() {wipeGame();};
     document.querySelector(".tactable").appendChild(img2);
 }
@@ -41,13 +41,13 @@ function whoWon()
     if(letter == "X")
     {
         img.id = "won";
-        img.src = "images/won.png";
+        img.src = "tictactoe/images/won.png";
         won = true;
         winner = true;
     }
     else{
         img.id = "lost";
-        img.src = "images/lost.png";
+        img.src = "tictactoe/images/lost.png";
         lost = true;
     }
     document.querySelector(".tactable").appendChild(img);
@@ -59,7 +59,7 @@ function putLine(idName)
 {
     let img = document.createElement("img");
     img.className = "line";
-    img.src = "images/line.png";
+    img.src = "tictactoe/images/line.png";
     img.id = idName;
     document.querySelector(".tactable").appendChild(img);
 }
@@ -281,7 +281,7 @@ function tieCheck()
         tie = true;
         let img = document.createElement("img");
         img.id = "tie";
-        img.src = "images/tie.png";
+        img.src = "tictactoe/images/tie.png";
         document.querySelector(".tactable").appendChild(img);
         retryButton();
         
@@ -331,7 +331,7 @@ function someAI()
         
                 let img = document.createElement("img");
                 img.className = "circle";
-                img.src = "images/circle.png";
+                img.src = "tictactoe/images/circle.png";
                 document.getElementById(map[strRC]).appendChild(img);
         
                 grid[row][column] = "O";
@@ -356,7 +356,7 @@ function someAI()
 
         let img = document.createElement("img");
         img.className = "circle";
-        img.src = "images/circle.png";
+        img.src = "tictactoe/images/circle.png";
         document.getElementById(map[row+column]).appendChild(img);
 
         grid[row][column] = "O";
@@ -379,7 +379,7 @@ export function boxClick(box)
 
         let img = document.createElement("img");
         img.className = "x";
-        img.src = "images/x.png";
+        img.src = "tictactoe/images/x.png";
         document.getElementById(box.id).appendChild(img);
 
         grid[row][column] = "X";

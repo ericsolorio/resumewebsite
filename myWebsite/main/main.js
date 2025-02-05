@@ -3,8 +3,8 @@
     // so the current code can work
 
 export let isLPActive = false;
+export let isLPActiveLL = false;
 import * as tac from "../tictactoe/tictactoe.js";
-console.log(tac)
 
 const gameExitBox = document.querySelector(".gameExitBox")
 let img0 = null
@@ -12,15 +12,36 @@ let img1 = null
 let img2 = null
 let img3 = null
 
+function makeLL(){
+    let canvas = document.createElement("canvas")
+    canvas.id = "llGameScreen"
+    canvas.width = "650"
+    canvas.height = "650"
+
+    let llScript = document.createElement("script")
+    llScript.id = "llScript"
+    llScript.type = "module"
+    llScript.src = "lunarLander/src/index.js"
+
+    img0 = document.createElement("img")
+    img0.id = "img_SC"
+    img0.src = "lunarLander/images/spaceCraft.png"
+    img0.classList.add("llImg")
+
+    document.body.append(img0)
+    document.head.append(llScript)
+    gameExitBox.append(canvas)
+}
+
 
 function makeSI(){
     let canvas = document.createElement("canvas")
-    canvas.id = "gameScreen"
+    canvas.id = "siGameScreen"
     canvas.width = "650"
     canvas.height = "650"
 
     let siScript = document.createElement("script")
-    siScript.id = "siSCript"
+    siScript.id = "siScript"
     siScript.type = "module"
     siScript.src = "spaceInvaders/src/index.js"
 
@@ -110,6 +131,10 @@ function makeTac(){
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+
 
 const gameBoxes = document.querySelectorAll(".GamesTableBox")
 const overlay = document.querySelector(".Overlay");
@@ -132,6 +157,10 @@ gameBoxes.forEach(box => {
             makeSI()
             isLPActive = true
             gameExitBox.classList.add("si")
+        }
+        if(box.id == "game3"){
+            makeLL()
+            isLPActiveLL = true
         }
 
     })
@@ -162,8 +191,8 @@ function closeGame(){
     // Forum: how can i detect if a parent element has a specific child element with javascript?
     // Shai said that I can use getElementById
     // I used querySelector
-    if(document.querySelector("canvas")){
-        let noway = document.querySelector("canvas")
+    if(document.querySelector("#siGameScreen")){
+        let noway = document.querySelector("#siGameScreen")
         gameExitBox.removeChild(noway)
         let nowaypt2 = document.querySelector("#siScript")
         document.head.removeChild(nowaypt2)
@@ -174,6 +203,17 @@ function closeGame(){
         document.body.removeChild(img1)
         document.body.removeChild(img2)
         document.body.removeChild(img3)
+    }
+
+    if(document.querySelector("#llGameScreen")){
+        let noway = document.querySelector("#llGameScreen")
+        gameExitBox.removeChild(noway)
+        let nowaypt2 = document.querySelector("#llScript")
+        document.head.removeChild(nowaypt2)
+
+        isLPActiveLL = false
+
+        document.body.removeChild(img0)
     }
     
 }

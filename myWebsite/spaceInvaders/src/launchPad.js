@@ -13,14 +13,13 @@ export default class LaunchPad{
         this.gameOverScreen = false
         this.victoryScreen = false
 
-        this.canvas = document.querySelector("#gameScreen")
+        this.canvas = document.querySelector("#siGameScreen")
         /////////////////////////////////////////////////////////
         let newCTX = this.canvas.getContext("2d")
         this.ctx = newCTX
 
         // this.ctx = this.canvas.getContext("2d")
         //////////////////////////////////////////////////
-        console.log("is this running?")
 
         this.gameList = new Set()
 

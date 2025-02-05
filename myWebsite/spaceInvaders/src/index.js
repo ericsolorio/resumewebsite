@@ -33,8 +33,6 @@ function gameLoop(timestamp){
 
     // launchPad.update(deltaTime)
 
-    console.log(isLPActive)
-
 
     if(isLPActive){
         if(counter == 0){
