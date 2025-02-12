@@ -2,7 +2,15 @@
 export function inputSC(sc){
     document.addEventListener("keydown", e =>{
         if(e.key == "w"){
-            sc.yVelocity += 0.01
+            if(sc.yVelocity > -20){
+                sc.yVelocity -= 4
+            }
+        }
+        if(e.key == "a"){
+            sc.left = true
+        }
+        if(e.key == "d"){
+            sc.right = true
         }
     })
 }

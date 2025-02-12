@@ -4,8 +4,6 @@ import { isLPActiveLL } from "../../main/main.js";
 
 let launchPad = null
 
-let counter = 0;
-
 let lastTime = 0;
 
 
@@ -13,18 +11,16 @@ function gameLoop(timestamp){
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp
 
-
     if(isLPActiveLL){
-        if(counter == 0){
+        if(launchPad == null){
             launchPad = new LaunchPad()
-            counter++;
         }
         launchPad.update(deltaTime)
     }
     else{
-        if(counter == 1){
+        if(launchPad != null){
+            launchPad.gameList.clear()
             launchPad = null
-            counter = 0
         }
     }
 

@@ -1,39 +1,34 @@
 // Lunar Lander
 import { Game } from "./game.js"
-import { isLPActiveLL } from "../../main/main.js";
-
-let game = null
-
-let counter = 0
 
 export class LaunchPad{
     constructor(){
         this.deltaTime = null
         this.canvas = document.querySelector("#llGameScreen")
-        this.ctx = this.canvas.getContext("2d")
+        //this.ctx = this.canvas.getContext("2d")
+
+
+        let newCTX = this.canvas.getContext("2d")
+        this.ctx = newCTX
+        
+
+        
+        console.log("THIS SHOULD BE EMPTY")
+        console.log(this.gameList)
+        
+
+        this.gameList = new Set()
+        this.game = new Game()
+        this.gameList.add(this.game)
+
+        console.log("THIS SHOULD be one")
+        console.log(this.gameList)
     }
 
     update(deltaTime){
         this.deltaTime = deltaTime
-
-        console.log(isLPActiveLL)
-
-        if(isLPActiveLL){
-            if(counter == 0){
-                game = new Game()
-                counter++
-            }
+        this.gameList.forEach(game => {
             game.update(this)
-        }
-        else{
-            if(counter == 1){
-                game = null
-                counter = 0
-            }
-        }
-
-
-
-        game.update(this)
+        })
     }
 }
