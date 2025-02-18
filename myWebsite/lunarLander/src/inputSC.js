@@ -7,10 +7,10 @@ export function inputSC(sc){
             }
         }
         if(e.key == "a"){
-            sc.left = true
+            sc.angle -= 1
         }
         if(e.key == "d"){
-            sc.right = true
+            sc.angle += 1
         }
     })
 }

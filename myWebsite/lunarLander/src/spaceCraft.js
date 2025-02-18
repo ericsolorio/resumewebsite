@@ -12,30 +12,61 @@ export class SpaceCraft{
         this.xVelocity = 0
         this.yVelocity = 0
 
-        this.left = false
-        this.right = false
+        // this.left = false
+        // this.right = false
+
+
+        ///
+        // this.imageCenterX = image.width / 2
+        // this.imageCenterY = image.height / 2
+        ///
+
+        // this.imageCenterX = this.image.width / 2
+        // this.imageCenterY = this.image.height / 2
+
+        this.angle = 0
 
 
         new inputSC(this)
     }
     update(launchPad){
 
-        if(this.left){
-            launchPad.ctx.rotate(.001)
-            this.left = false
-        }
-        if(this.right){
-            launchPad.ctx.rotate(-.001)
-            this.right = false
-        }
 
-        console.log(this.yVelocity)
+        console.log('x: ', this.x)
+        console.log('y: ', this.y)
 
         this.yVelocity += .1
 
         this.x += this.xVelocity * (1/launchPad.deltaTime)
         this.y += this.yVelocity * (1/launchPad.deltaTime)
 
-        launchPad.ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+        //
+        // ctx.translate(imageCenterX, imageCenterY)
+        // ctx.rotate(rotationAngleToRadians)
+        // ctx.drawImage(Image, -imageCenterX, -imageCenterY)
+        //
+
+        //launchPad.ctx.translate(this.imageCenterX, this.imageCenterY)
+        //launchPad.ctx.rotate(180 * (3.16/180))
+
+        //launchPad.ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+
+
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //EVERYONE STOP, THE ROTATING WAS ONLY POSSIBLE BC OF Luis Estrada FROM GAMEDEV.STACKEXCHANGE
+        // THE URL IS: https://gamedev.stackexchange.com/questions/67274/how-to-rotate-an-image-on-an-html5-canvas-without-rotating-the-whole-canvas 
+        // THIS IS VERY IMPORTANT
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+
+
+        console.log(this.angle)
+        launchPad.ctx.save()
+        launchPad.ctx.translate(this.x, this.y)
+        launchPad.ctx.rotate(this.angle * (Math.PI/180))
+        launchPad.ctx.drawImage(this.image,-(this.width/2), -(this.height/2))
+        launchPad.ctx.restore()
     }
+
 }
