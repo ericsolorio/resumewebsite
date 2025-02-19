@@ -6,8 +6,8 @@ export class SpaceCraft{
         this.image = document.querySelector("#img_SC")
         this.x = 300
         this.y = 550
-        this.width = 50
-        this.height = 50
+        this.width = 40
+        this.height = 40
 
         this.xVelocity = 0
         this.yVelocity = 0
@@ -29,11 +29,7 @@ export class SpaceCraft{
 
         new inputSC(this)
     }
-    update(launchPad){
-
-
-        console.log('x: ', this.x)
-        console.log('y: ', this.y)
+    update(launchPad, game){
 
         this.yVelocity += .1
 
@@ -61,11 +57,11 @@ export class SpaceCraft{
         ////////////////////////////////////////////////////////////////////////////////
 
 
-        console.log(this.angle)
+        
         launchPad.ctx.save()
         launchPad.ctx.translate(this.x, this.y)
         launchPad.ctx.rotate(this.angle * (Math.PI/180))
-        launchPad.ctx.drawImage(this.image,-(this.width/2), -(this.height/2))
+        launchPad.ctx.drawImage(this.image,-(this.width/2), -(this.height/2), this.width, this.height)
         launchPad.ctx.restore()
     }
 

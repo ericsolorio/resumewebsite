@@ -28,7 +28,14 @@ function makeLL(){
     img0.src = "lunarLander/images/spaceCraft.png"
     img0.classList.add("llImg")
 
+    img1 = document.createElement("img")
+    img1.id = "img_flame"
+    img1.src = "lunarLander/images/scFlame.png"
+    img1.classList.add("llImg")
+
     document.body.append(img0)
+    document.body.append(img1)
+
     document.head.append(llScript)
     gameExitBox.append(canvas)
 }
