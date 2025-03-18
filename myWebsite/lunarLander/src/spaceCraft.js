@@ -1,13 +1,12 @@
 // Lunar Lander
-import { inputSC } from "./inputSC.js"
 
 export class SpaceCraft{
     constructor(){
         this.image = document.querySelector("#img_SC")
         this.x = 300
         this.y = 550
-        this.width = 40
-        this.height = 40
+        this.width = 20
+        this.height = 20
 
         this.xVelocity = 0
         this.yVelocity = 0
@@ -26,8 +25,6 @@ export class SpaceCraft{
 
         this.angle = 0
 
-
-        new inputSC(this)
     }
     update(launchPad, game){
 

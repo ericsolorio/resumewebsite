@@ -33,8 +33,14 @@ function makeLL(){
     img1.src = "lunarLander/images/scFlame.png"
     img1.classList.add("llImg")
 
+    img2 = document.createElement("img")
+    img2.id = "img_line"
+    img2.src = "lunarLander/images/line.png"
+    img2.classList.add("llImg")
+
     document.body.append(img0)
     document.body.append(img1)
+    document.body.append(img2)
 
     document.head.append(llScript)
     gameExitBox.append(canvas)
@@ -221,6 +227,9 @@ function closeGame(){
         isLPActiveLL = false
 
         document.body.removeChild(img0)
+        document.body.removeChild(img1)
+        document.body.removeChild(img2)
+
     }
     
 }
