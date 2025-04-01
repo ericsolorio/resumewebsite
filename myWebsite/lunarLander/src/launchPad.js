@@ -12,17 +12,9 @@ export class LaunchPad{
         this.ctx = newCTX
         
 
-        
-        console.log("THIS SHOULD BE EMPTY")
-        console.log(this.gameList)
-        
-
         this.gameList = new Set()
         this.game = new Game()
         this.gameList.add(this.game)
-
-        console.log("THIS SHOULD be one")
-        console.log(this.gameList)
     }
 
     update(deltaTime){

@@ -1,5 +1,6 @@
 export class Line{
     constructor(){
+        
         this.image = document.querySelector("#img_line")
         this.x = 0
         this.y = 0
@@ -11,7 +12,7 @@ export class Line{
 
     update(launchPad, game){
 
-        // I don't think this needs to be here since it's only done once
+        // needs to be drawn multiple times because the canvas is cleared multiple times
 
         launchPad.ctx.save()
         launchPad.ctx.translate(this.x, this.y)

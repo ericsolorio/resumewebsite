@@ -1,9 +1,9 @@
 // Lunar Lander
 
 export class SpaceCraft{
-    constructor(){
+    constructor(GAME){
         this.image = document.querySelector("#img_SC")
-        this.x = 300
+        this.x = GAME.line7.x
         this.y = 550
         this.width = 20
         this.height = 20
