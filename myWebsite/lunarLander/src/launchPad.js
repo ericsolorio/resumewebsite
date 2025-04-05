@@ -13,7 +13,7 @@ export class LaunchPad{
         
 
         this.gameList = new Set()
-        this.game = new Game()
+        this.game = new Game(this)
         this.gameList.add(this.game)
     }
 

@@ -4,10 +4,14 @@ import { SpaceCraft } from "./spaceCraft.js"
 import { inputSC } from "./inputSC.js"
 import { wIsPressed } from "./inputSC.js"
 import { Line } from "./line.js"
+import { mousePointer } from "./mousePointerTesting.js"
 
 
 export class Game{
-    constructor(){
+    constructor(launchPad){
+
+        this.launchPad = launchPad
+
         this.GAMEHEIGHT = 650
         this.GAMEWIDTH = 650
         
@@ -131,22 +135,59 @@ export class Game{
         this.lineStorage[14] = this.line14
 
 
+        ///////////////////////////////////////
+        this.line99 = new Line()
+        this.line99.x = 200
+        this.line99.y = 200
+        this.line99.height = 20
+        this.line99.width = 100
+        this.lineStorage[99] = this.line99
+
+
+
+        //find four points
+        //the x and y are the center of the rectangle
+
+        this.topleft = {
+            x: this.line99.x - (this.line99.width/2),
+            y: this.line99.y - (this.line99.height/2)
+        }
+
+        this.topRight = {
+            x: this.line99.x + (this.line99.width/2),
+            y: this.line99.y - (this.line99.height/2)
+        }
+
+        this.bottomLeft = {
+            x: this.line99.x - (this.line99.width/2),
+            y: this.line99.y + (this.line99.height/2)
+        }
+
+        this.bottomRight = {
+            x: this.line99.x + (this.line99.width/2),
+            y: this.line99.y + (this.line99.height/2)
+        }
+
+        console.log(", x: ", this.bottomRight.x, " y: ", this.bottomRight.y)
+
+
         /////////////////////////////////////////////////////
         ////////////////////////////////////////////////////
         this.tempLineStorage  = {
             "left": 4, 
             "right": 5
         }
-        //////////////////////////////////////
+        ///////////////////////////////////////////////
+        ///////////////////////////////////////////////
+        ///////////////////////////////////////////////
 
         this.sc = new SpaceCraft(this)
         this.flame = new Flame(this.sc)
         new inputSC(this.sc)
 
 
-        ///////////////////////////////////////////////
-        ///////////////////////////////////////////////
-        ///////////////////////////////////////////////
+
+        this.mp = new mousePointer(launchPad)
     }
 
 
@@ -166,15 +207,29 @@ export class Game{
         this.flame.update(launchPad, this)
 
 
-        
-        console.log(this.lineStorage[this.tempLineStorage["right"]].x)
 
-        if(this.sc.x > this.lineStorage[this.tempLineStorage["right"]].x + this.lineStorage[this.tempLineStorage["right"]].width/2){ 
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+
+
+        // you might need to add angled math
+        if(this.sc.x > this.lineStorage[this.tempLineStorage["right"]].x){ 
             this.tempLineStorage["left"] = this.tempLineStorage["right"]
-            this.tempLineStorage["right"] = (this.tempLineStorage["right"] + 1) % 15
+            this.tempLineStorage["right"] = (this.tempLineStorage["right"] + 1)
         }
 
-        console.log(this.tempLineStorage)
+        
+
+        else if(this.sc.x < this.lineStorage[this.tempLineStorage["left"]].x){
+            this.tempLineStorage["right"] = this.tempLineStorage["left"]
+            this.tempLineStorage["left"] = (this.tempLineStorage["left"] - 1)
+        }
+
+
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -184,7 +239,7 @@ export class Game{
         })
 
 
-
+        this.mp.update(launchPad)
 
 
     }

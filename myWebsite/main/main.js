@@ -38,9 +38,15 @@ function makeLL(){
     img2.src = "lunarLander/images/line.png"
     img2.classList.add("llImg")
 
+    img3 = document.createElement("img")
+    img3.id = "img_mousePointer"
+    img3.src = "lunarLander/images/mousePointer.png"
+    img2.classList.add("llImg")
+
     document.body.append(img0)
     document.body.append(img1)
     document.body.append(img2)
+    document.body.append(img3)
 
     document.head.append(llScript)
     gameExitBox.append(canvas)
