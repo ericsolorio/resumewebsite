@@ -11,6 +11,11 @@ export class SpaceCraft{
         this.xVelocity = 0
         this.yVelocity = 0
 
+        this.myVertices = {}
+        this.myEdges = {}
+        this.myPerpVectors = {}
+
+
         // this.left = false
         // this.right = false
 

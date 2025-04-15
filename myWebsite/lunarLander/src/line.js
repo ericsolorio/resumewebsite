@@ -8,6 +8,11 @@ export class Line{
         this.height = 3
 
         this.angle = 0
+
+
+        this.myVertices = {}
+        this.myEdges = {}
+        this.myPerpVectors = {}
     }
 
     update(launchPad, game){
