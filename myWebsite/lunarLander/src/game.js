@@ -25,6 +25,32 @@ function getAngledCoords(xc, yc, xi, yi, angleOfLine){
 }
 
 
+function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp){
+    
+    //compare sc with left line
+    //check dot product
+    for(let i = 0; i < scAndLeftPerp.length; i++){
+        //since i know both shapes have 4 vertices, im going to hardcode it
+
+        Object.keys(lineStorage[tempLineStorage["left"]].myVertices).forEach(vertici =>{
+            console.log(scAndLeftPerp)
+            scAndLeftPerp[i].x * lineStorage[tempLineStorage["left"]].myVertices[vertici].x
+        })
+
+        for(let j = 0; j < 4; j++){
+
+        }
+        for(let j = 0; j < 4; j++){
+
+        }
+    }
+}
+
+
+//let allPerpVectors = []
+let scAndLeftPerp = []
+let scAndRightPerp = []
+
 export class Game{
     constructor(launchPad){
 
@@ -197,7 +223,6 @@ export class Game{
         ///////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////
 
-
         // now that we have vertices get edges and perpendicular vectors 
         Object.values(this.lineStorage).forEach(line => {
             let right = {
@@ -241,6 +266,8 @@ export class Game{
                 x: (-1) * line.myEdges["top"].y,
                 y: line.myEdges["top"].x
             }
+
+
 
 
             // console.log("Edges: " + 
@@ -354,11 +381,11 @@ export class Game{
         this.sc.myEdges["top"] = top
 
 
-        console.log("Edges: \n" + 
-            "right " + "x: " + this.sc.myEdges["right"].x + " y: " + this.sc.myEdges["right"].y + "\n"+
-            "bottom " + "x: " + this.sc.myEdges["bottom"].x + " y: " + this.sc.myEdges["bottom"].y + "\n"+
-            "left " + "x: " + this.sc.myEdges["left"].x + " y: " + this.sc.myEdges["left"].y + "\n"+
-            "top " + "x: " + this.sc.myEdges["top"].x + " y: " + this.sc.myEdges["top"].y + "\n")
+        // console.log("Edges: \n" + 
+        //     "right " + "x: " + this.sc.myEdges["right"].x + " y: " + this.sc.myEdges["right"].y + "\n"+
+        //     "bottom " + "x: " + this.sc.myEdges["bottom"].x + " y: " + this.sc.myEdges["bottom"].y + "\n"+
+        //     "left " + "x: " + this.sc.myEdges["left"].x + " y: " + this.sc.myEdges["left"].y + "\n"+
+        //     "top " + "x: " + this.sc.myEdges["top"].x + " y: " + this.sc.myEdges["top"].y + "\n")
 
 
         this.sc.myPerpVectors["right"] = {
@@ -379,30 +406,91 @@ export class Game{
         }
 
 
-        console.log("Perp Vectors: " + 
-                    "right " + "x: " + this.sc.myPerpVectors["right"].x + " y: " + this.sc.myPerpVectors["right"].y + "\n"+
-                    "bottom " + "x: " + this.sc.myPerpVectors["bottom"].x + " y: " + this.sc.myPerpVectors["bottom"].y + "\n"+
-                    "left " + "x: " + this.sc.myPerpVectors["left"].x + " y: " + this.sc.myPerpVectors["left"].y + "\n"+
-                    "top " + "x: " + this.sc.myPerpVectors["top"].x + " y: " + this.sc.myPerpVectors["top"].y + "\n")
+        // console.log("Perp Vectors: " + 
+        //             "right " + "x: " + this.sc.myPerpVectors["right"].x + " y: " + this.sc.myPerpVectors["right"].y + "\n"+
+        //             "bottom " + "x: " + this.sc.myPerpVectors["bottom"].x + " y: " + this.sc.myPerpVectors["bottom"].y + "\n"+
+        //             "left " + "x: " + this.sc.myPerpVectors["left"].x + " y: " + this.sc.myPerpVectors["left"].y + "\n"+
+        //             "top " + "x: " + this.sc.myPerpVectors["top"].x + " y: " + this.sc.myPerpVectors["top"].y + "\n")
 
-        /////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-
-
-        // you might need to add angled math
-        // if(this.sc.x > this.lineStorage[this.tempLineStorage["right"]].x){ 
-        //     this.tempLineStorage["left"] = this.tempLineStorage["right"]
-        //     this.tempLineStorage["right"] = (this.tempLineStorage["right"] + 1)
-        // }
 
         
 
-        // else if(this.sc.x < this.lineStorage[this.tempLineStorage["left"]].x){
-        //     this.tempLineStorage["right"] = this.tempLineStorage["left"]
-        //     this.tempLineStorage["left"] = (this.tempLineStorage["left"] - 1)
-        // }
 
+        
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+
+
+        //you might need to add angled math
+
+        //this works just need to figure out a way to deep copy
+        if(this.sc.x > this.lineStorage[this.tempLineStorage["right"]].x){ 
+            scAndLeftPerp = []
+            scAndRightPerp = []
+            this.tempLineStorage["left"] = this.tempLineStorage["right"]
+            this.tempLineStorage["right"] = (this.tempLineStorage["right"] + 1)
+
+
+            scAndLeftPerp.push(
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["right"],
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["bottom"],
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["left"],
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["top"]
+            )
+
+
+            scAndRightPerp.push(
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["right"],
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["bottom"],
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["left"],
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["top"]
+            )
+            
+            //console.log(allPerpVectors)
+
+        }
+
+        
+
+        else if(this.sc.x < this.lineStorage[this.tempLineStorage["left"]].x){
+            scAndLeftPerp = []
+            scAndRightPerp = []
+            this.tempLineStorage["right"] = this.tempLineStorage["left"]
+            this.tempLineStorage["left"] = (this.tempLineStorage["left"] - 1)
+
+
+            scAndLeftPerp.push(
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["right"],
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["bottom"],
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["left"],
+                this.lineStorage[this.tempLineStorage["left"]].myPerpVectors["top"]
+            )
+
+
+            scAndRightPerp.push(
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["right"],
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["bottom"],
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["left"],
+                this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["top"]
+            )
+            
+            //console.log(allPerpVectors)
+
+        }
+
+        //console.log(allPerpVectors)
+
+        // also push the perps of spacecraft
+        //////////
+        scAndLeftPerp.push(this.sc.myPerpVectors)
+        scAndRightPerp.push(this.sc.myPerpVectors)
+
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+
+        checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp)
 
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
