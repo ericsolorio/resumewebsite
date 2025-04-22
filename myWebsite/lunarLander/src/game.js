@@ -25,25 +25,120 @@ function getAngledCoords(xc, yc, xi, yi, angleOfLine){
 }
 
 
-function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp){
-    
+function checkCollisionSATLEFT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp){
     //compare sc with left line
     //check dot product
     for(let i = 0; i < scAndLeftPerp.length; i++){
-        //since i know both shapes have 4 vertices, im going to hardcode it
+
+        let minA = null
+        let maxA = null
 
         Object.keys(lineStorage[tempLineStorage["left"]].myVertices).forEach(vertici =>{
-            console.log(scAndLeftPerp)
-            scAndLeftPerp[i].x * lineStorage[tempLineStorage["left"]].myVertices[vertici].x
+            let dp = scAndLeftPerp[i].x * lineStorage[tempLineStorage["left"]].myVertices[vertici].x +
+                    scAndLeftPerp[i].y * lineStorage[tempLineStorage["left"]].myVertices[vertici].y
+
+            if(dp < minA){
+                minA = dp
+            }
+            else if(dp > maxA){
+                maxA = dp
+            }
+            else{
+                minA= dp
+                maxA= dp
+            }
         })
 
-        for(let j = 0; j < 4; j++){
 
-        }
-        for(let j = 0; j < 4; j++){
+        let minB = null
+        let maxB = null
+        Object.keys(sc.myVertices).forEach(vertici =>{
+            let dp = scAndLeftPerp[i].x * sc.myVertices[vertici].x +
+                    scAndLeftPerp[i].y * sc.myVertices[vertici].y
+            if(dp < minB){
+                minB = dp
+            }
+            else if(dp > maxB){
+                maxB = dp
+            }
+            else{
+                minB= dp
+                maxB= dp
+            }
+        })
 
+
+        //check if gap
+        // if true leave function
+        // if never true that means there colliding
+        if(maxA < minB || maxB < minA){
+            console.log("gap found")
+            return
         }
     }
+
+    // if for loops ends without any interuptions than colliding
+    console.log("colliding!")
+}
+
+    /////////////////////////////////
+    //split or add a for loop
+    //I think cleaner with two functions
+    //might need to split this to two functions
+    //////////////////////////////////////////////////////////////////////////////////////
+
+function checkCollisionSATRIGHT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp){
+// checking right line and spaceship
+    for(let i = 0; i < scAndRightPerp.length; i++){
+
+        let minA = null
+        let maxA = null
+        Object.keys(lineStorage[tempLineStorage["right"]].myVertices).forEach(vertici =>{
+            let dp = scAndRightPerp[i].x * lineStorage[tempLineStorage["right"]].myVertices[vertici].x +
+                    scAndRightPerp[i].y * lineStorage[tempLineStorage["right"]].myVertices[vertici].y
+
+
+            if(dp < minA){
+                minA = dp
+            }
+            else if(dp > maxA){
+                maxA = dp
+            }
+            else{
+                minA= dp
+                maxA= dp
+            }
+        })
+
+        let minB = null
+        let maxB = null
+        Object.keys(sc.myVertices).forEach(vertici =>{
+            let dp = scAndRightPerp[i].x * sc.myVertices[vertici].x +
+                    scAndRightPerp[i].y * sc.myVertices[vertici].y
+
+            if(dp < minB){
+                minB = dp
+            }
+            else if(dp > maxB){
+                maxB= dp
+            }
+            else{
+                minB= dp
+                maxB= dp
+            }
+        })
+
+        //check if gap
+        // if true leave function
+        // if never true that means there colliding
+        if(maxA < minB || maxB < minA){
+            console.log("gap found")
+            break
+        }
+
+    }
+
+
 }
 
 
@@ -490,7 +585,9 @@ export class Game{
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
 
-        checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp)
+        //bro just make one function and just send in the different perp list
+        checkCollisionSATLEFT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp)
+        checkCollisionSATRIGHT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp)
 
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
