@@ -5,6 +5,7 @@ import { inputSC } from "./inputSC.js"
 import { wIsPressed } from "./inputSC.js"
 import { Line } from "./line.js"
 import { mousePointer } from "./mousePointerTesting.js"
+import { makeMap } from "./makeMap.js"
 
 
 function getAngledCoords(xc, yc, xi, yi, angleOfLine){
@@ -25,17 +26,27 @@ function getAngledCoords(xc, yc, xi, yi, angleOfLine){
 }
 
 
-function checkCollisionSATLEFT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp){
-    //compare sc with left line
+function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp, specificLine){
+    //compare sc with left and right line
     //check dot product
-    for(let i = 0; i < scAndLeftPerp.length; i++){
+
+    let specificPerpList = null
+    if(specificLine == "left"){
+        specificPerpList = scAndLeftPerp
+    }
+    else{
+        specificPerpList = scAndRightPerp
+    }
+
+
+    for(let i = 0; i < specificPerpList.length; i++){
 
         let minA = null
         let maxA = null
 
-        Object.keys(lineStorage[tempLineStorage["left"]].myVertices).forEach(vertici =>{
-            let dp = scAndLeftPerp[i].x * lineStorage[tempLineStorage["left"]].myVertices[vertici].x +
-                    scAndLeftPerp[i].y * lineStorage[tempLineStorage["left"]].myVertices[vertici].y
+        Object.keys(lineStorage[tempLineStorage[specificLine]].myVertices).forEach(vertici =>{
+            let dp = (specificPerpList[i].x * lineStorage[tempLineStorage[specificLine]].myVertices[vertici].x) +
+                    (specificPerpList[i].y * lineStorage[tempLineStorage[specificLine]].myVertices[vertici].y)
 
             if(dp < minA){
                 minA = dp
@@ -44,8 +55,8 @@ function checkCollisionSATLEFT(sc, lineStorage, tempLineStorage, scAndLeftPerp, 
                 maxA = dp
             }
             else{
-                minA= dp
-                maxA= dp
+                minA = dp
+                maxA = dp
             }
         })
 
@@ -53,8 +64,8 @@ function checkCollisionSATLEFT(sc, lineStorage, tempLineStorage, scAndLeftPerp, 
         let minB = null
         let maxB = null
         Object.keys(sc.myVertices).forEach(vertici =>{
-            let dp = scAndLeftPerp[i].x * sc.myVertices[vertici].x +
-                    scAndLeftPerp[i].y * sc.myVertices[vertici].y
+            let dp = (specificPerpList[i].x * sc.myVertices[vertici].x) +
+                    (specificPerpList[i].y * sc.myVertices[vertici].y)
             if(dp < minB){
                 minB = dp
             }
@@ -71,8 +82,7 @@ function checkCollisionSATLEFT(sc, lineStorage, tempLineStorage, scAndLeftPerp, 
         //check if gap
         // if true leave function
         // if never true that means there colliding
-        if(maxA < minB || maxB < minA){
-            console.log("gap found")
+        if(maxA <= minB || maxB <= minA){
             return
         }
     }
@@ -81,68 +91,7 @@ function checkCollisionSATLEFT(sc, lineStorage, tempLineStorage, scAndLeftPerp, 
     console.log("colliding!")
 }
 
-    /////////////////////////////////
-    //split or add a for loop
-    //I think cleaner with two functions
-    //might need to split this to two functions
-    //////////////////////////////////////////////////////////////////////////////////////
 
-function checkCollisionSATRIGHT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp){
-// checking right line and spaceship
-    for(let i = 0; i < scAndRightPerp.length; i++){
-
-        let minA = null
-        let maxA = null
-        Object.keys(lineStorage[tempLineStorage["right"]].myVertices).forEach(vertici =>{
-            let dp = scAndRightPerp[i].x * lineStorage[tempLineStorage["right"]].myVertices[vertici].x +
-                    scAndRightPerp[i].y * lineStorage[tempLineStorage["right"]].myVertices[vertici].y
-
-
-            if(dp < minA){
-                minA = dp
-            }
-            else if(dp > maxA){
-                maxA = dp
-            }
-            else{
-                minA= dp
-                maxA= dp
-            }
-        })
-
-        let minB = null
-        let maxB = null
-        Object.keys(sc.myVertices).forEach(vertici =>{
-            let dp = scAndRightPerp[i].x * sc.myVertices[vertici].x +
-                    scAndRightPerp[i].y * sc.myVertices[vertici].y
-
-            if(dp < minB){
-                minB = dp
-            }
-            else if(dp > maxB){
-                maxB= dp
-            }
-            else{
-                minB= dp
-                maxB= dp
-            }
-        })
-
-        //check if gap
-        // if true leave function
-        // if never true that means there colliding
-        if(maxA < minB || maxB < minA){
-            console.log("gap found")
-            break
-        }
-
-    }
-
-
-}
-
-
-//let allPerpVectors = []
 let scAndLeftPerp = []
 let scAndRightPerp = []
 
@@ -153,126 +102,9 @@ export class Game{
 
         this.GAMEHEIGHT = 650
         this.GAMEWIDTH = 650
-        
-        
-
-        ///////////////////////////////////////////////
-        ///////////////////////////////////////////////
-        ///////////////////////////////////////////////
-
-        ///multiple lines the make the map
-
-        this.lineStorage = {}
-
-        this.line0 = new Line()
-        this.line0.x = 0
-        this.line0.y = 550
-        this.line0.angle = 0
-        this.lineStorage[0] = this.line0
-
-        this.line1 = new Line()
-        this.line1.x = 50
-        this.line1.y = 550
-        this.line1.angle = 0
-        this.lineStorage[1] = this.line1
-
-        this.line2 = new Line()
-        this.line2.x = 110
-        this.line2.y = 525
-        this.line2.angle = -45
-        this.lineStorage[2] = this.line2
-
-        this.line3 = new Line()
-        this.line3.x = 170
-        this.line3.y = 500
-        this.line3.angle = 0
-        this.lineStorage[3] = this.line3
-
-        this.line4 = new Line()
-        this.line4.x = 223
-        this.line4.y = 470
-        this.line4.angle = -60
-        this.lineStorage[4] = this.line4
-
-        this.line5 = new Line()
-        this.line5.x = 263
-        this.line5.y = 412
-        this.line5.angle = -50
-        this.lineStorage[5] = this.line5
-
-        // diff width
-        this.line6 = new Line()
-        this.line6.x = 304
-        this.line6.y = 385
-        this.line6.angle = 0
-        this.line6.width = 35
-        this.lineStorage[6] = this.line6
-
-        this.line7 = new Line()
-        this.line7.x = 346
-        this.line7.y = 360
-        this.line7.angle = -45
-        this.lineStorage[7] = this.line7
-
-        this.line8 = new Line()
-        this.line8.x = 396
-        this.line8.y = 360
-        this.line8.angle = 45
-        this.lineStorage[8] = this.line8
-
-        this.line9 = new Line()
-        this.line9.x = 422
-        this.line9.y = 420
-        this.line9.angle = 90
-        this.lineStorage[9] = this.line9
-
-        this.line10 = new Line()
-        this.line10.x = 433
-        this.line10.y = 488
-        this.line10.angle = 70
-        this.lineStorage[10] = this.line10
-
-        // diff width
-        this.line11 = new Line()
-        this.line11.x = 470
-        this.line11.y = 520
-        this.line11.width = 50
-        this.lineStorage[11] = this.line11
-
-        this.line12 = new Line()
-        this.line12.x = 520
-        this.line12.y = 495
-        this.line12.angle = -45
-        this.lineStorage[12] = this.line12
-
-        this.line13 = new Line()
-        this.line13.x = 580
-        this.line13.y = 470
-        this.lineStorage[13] = this.line13
-
-        this.line14 = new Line()
-        this.line14.x = 640
-        this.line14.y = 493
-        this.line14.angle = 45
-        this.lineStorage[14] = this.line14
 
 
-        ///////////////////////////////////////
-        this.line99 = new Line()
-        this.line99.x = 100
-        this.line99.y = 150
-        this.line99.angle = 45
-        this.line99.height = 20
-        this.line99.width = 100
-        this.lineStorage[99] = this.line99
-
-
-        
-
-
-        ////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////
+        makeMap(this)
 
 
         function getAngledCoords(xc, yc, xi, yi, angleOfLine){
@@ -292,21 +124,17 @@ export class Game{
             }
         }
 
-        //each line has a local map/dictionary of its vertices
-        ///////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////
-        let i = 0
+
+        //let i = 0
         Object.values(this.lineStorage).forEach(line => {
-            let tr = getAngledCoords(line.x, line.y, line.x + line.width/2, line.y - line.height/2, line.angle)
-            let br = getAngledCoords(line.x, line.y, line.x + line.width/2, line.y + line.height/2, line.angle)
-            let bl = getAngledCoords(line.x, line.y, line.x - line.width/2, line.y + line.height/2, line.angle)
-            let tl = getAngledCoords(line.x, line.y, line.x - line.width/2, line.y - line.height/2, line.angle)
-
-
-            line.myVertices["tr"] = tr
-            line.myVertices["br"] = br
-            line.myVertices["bl"] = bl
-            line.myVertices["tl"] = tl
+            line.myVertices["tr"] = 
+                getAngledCoords(line.x, line.y, line.x + line.width/2, line.y - line.height/2, line.angle)
+            line.myVertices["br"] = 
+                getAngledCoords(line.x, line.y, line.x + line.width/2, line.y + line.height/2, line.angle)
+            line.myVertices["bl"] = 
+                getAngledCoords(line.x, line.y, line.x - line.width/2, line.y + line.height/2, line.angle)
+            line.myVertices["tl"] = 
+                getAngledCoords(line.x, line.y, line.x - line.width/2, line.y - line.height/2, line.angle)
 
             // console.log("line " + i + "\n"+
             //             "tr " + "x: " + line.myVertices["tr"].x + " y: " + line.myVertices["tr"].y + "\n"+
@@ -315,32 +143,30 @@ export class Game{
             //             "tl " + "x: " + line.myVertices["tl"].x + " y: " + line.myVertices["tl"].y + "\n")
             // i++
         })
+
+
         ///////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////
+
 
         // now that we have vertices get edges and perpendicular vectors 
         Object.values(this.lineStorage).forEach(line => {
-            let right = {
+            line.myEdges["right"] = {
                 x: line.myVertices["br"].x - line.myVertices["tr"].x,
                 y: line.myVertices["br"].y - line.myVertices["tr"].y
             }
-            let bottom = {
+            line.myEdges["bottom"] = {
                 x: line.myVertices["bl"].x - line.myVertices["br"].x,
                 y: line.myVertices["bl"].y - line.myVertices["br"].y
             }
-            let left = {
+            line.myEdges["left"] = {
                 x: line.myVertices["tl"].x - line.myVertices["bl"].x,
                 y: line.myVertices["tl"].y - line.myVertices["bl"].y
             }
-            let top = {
+            line.myEdges["top"] = {
                 x: line.myVertices["tr"].x - line.myVertices["tl"].x,
                 y: line.myVertices["tr"].y - line.myVertices["tl"].y
             }
-
-            line.myEdges["right"] = right
-            line.myEdges["bottom"] = bottom
-            line.myEdges["left"] = left
-            line.myEdges["top"] = top
 
             // okay now inverse to find perpendicular lines
             // flip x and y, and times x by -1
@@ -386,16 +212,12 @@ export class Game{
         })
 
         
-
-
-
         /////////////////////////////////////////////////////
         ////////////////////////////////////////////////////
         this.tempLineStorage  = {
             "left": 4, 
             "right": 5
         }
-        ///////////////////////////////////////////////
         ///////////////////////////////////////////////
         ///////////////////////////////////////////////
 
@@ -431,18 +253,17 @@ export class Game{
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
+
+
         // find the vertices, edges, and perpendicular vectors of the spaceship
-
-
-        let spaceCraftTR = getAngledCoords(this.sc.x, this.sc.y, this.sc.x + this.sc.width/2, this.sc.y - this.sc.height/2, this.sc.angle)
-        let spaceCraftBR = getAngledCoords(this.sc.x, this.sc.y, this.sc.x + this.sc.width/2, this.sc.y + this.sc.height/2, this.sc.angle)
-        let spaceCraftBL = getAngledCoords(this.sc.x, this.sc.y, this.sc.x - this.sc.width/2, this.sc.y + this.sc.height/2, this.sc.angle)
-        let spaceCraftTL = getAngledCoords(this.sc.x, this.sc.y, this.sc.x - this.sc.width/2, this.sc.y - this.sc.height/2, this.sc.angle)
-
-        this.sc.myVertices["tr"] = spaceCraftTR
-        this.sc.myVertices["br"] = spaceCraftBR
-        this.sc.myVertices["bl"] = spaceCraftBL
-        this.sc.myVertices["tl"] = spaceCraftTL
+        this.sc.myVertices["tr"] = 
+            getAngledCoords(this.sc.x, this.sc.y, this.sc.x + this.sc.width/2, this.sc.y - this.sc.height/2, this.sc.angle)
+        this.sc.myVertices["br"] = 
+            getAngledCoords(this.sc.x, this.sc.y, this.sc.x + this.sc.width/2, this.sc.y + this.sc.height/2, this.sc.angle)
+        this.sc.myVertices["bl"] = 
+            getAngledCoords(this.sc.x, this.sc.y, this.sc.x - this.sc.width/2, this.sc.y + this.sc.height/2, this.sc.angle)
+        this.sc.myVertices["tl"] = 
+            getAngledCoords(this.sc.x, this.sc.y, this.sc.x - this.sc.width/2, this.sc.y - this.sc.height/2, this.sc.angle)
 
 
         // console.log(
@@ -453,27 +274,22 @@ export class Game{
 
 
 
-        let right = {
+        this.sc.myEdges["right"] = {
             x: this.sc.myVertices["br"].x - this.sc.myVertices["tr"].x,
             y: this.sc.myVertices["br"].y - this.sc.myVertices["tr"].y
         }
-        let bottom = {
+        this.sc.myEdges["bottom"] = {
             x: this.sc.myVertices["bl"].x - this.sc.myVertices["br"].x,
             y: this.sc.myVertices["bl"].y - this.sc.myVertices["br"].y
         }
-        let left = {
+        this.sc.myEdges["left"] = {
             x: this.sc.myVertices["tl"].x - this.sc.myVertices["bl"].x,
             y: this.sc.myVertices["tl"].y - this.sc.myVertices["bl"].y
         }
-        let top = {
+        this.sc.myEdges["top"] = {
             x: this.sc.myVertices["tr"].x - this.sc.myVertices["tl"].x,
             y: this.sc.myVertices["tr"].y - this.sc.myVertices["tl"].y
         }
-
-        this.sc.myEdges["right"] = right
-        this.sc.myEdges["bottom"] = bottom
-        this.sc.myEdges["left"] = left
-        this.sc.myEdges["top"] = top
 
 
         // console.log("Edges: \n" + 
@@ -509,8 +325,6 @@ export class Game{
 
 
         
-
-
         
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
@@ -518,6 +332,7 @@ export class Game{
 
 
         //you might need to add angled math
+        //the problem could be here
 
         //this works just need to figure out a way to deep copy
         if(this.sc.x > this.lineStorage[this.tempLineStorage["right"]].x){ 
@@ -541,8 +356,6 @@ export class Game{
                 this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["left"],
                 this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["top"]
             )
-            
-            //console.log(allPerpVectors)
 
         }
 
@@ -569,12 +382,8 @@ export class Game{
                 this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["left"],
                 this.lineStorage[this.tempLineStorage["right"]].myPerpVectors["top"]
             )
-            
-            //console.log(allPerpVectors)
 
         }
-
-        //console.log(allPerpVectors)
 
         // also push the perps of spacecraft
         //////////
@@ -585,9 +394,10 @@ export class Game{
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
 
-        //bro just make one function and just send in the different perp list
-        checkCollisionSATLEFT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp)
-        checkCollisionSATRIGHT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp)
+        
+        checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "left")
+        checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "right")
+
 
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
@@ -596,9 +406,15 @@ export class Game{
 
 
         //google ai help, how to iterate over dictionary
-        Object.keys(this.lineStorage).forEach(line => {
+        // Object.keys(this.lineStorage).forEach(line => {
+        //     this.lineStorage[line].update(launchPad, this)
+        // })
+
+        Object.values(this.tempLineStorage).forEach(line => {
             this.lineStorage[line].update(launchPad, this)
         })
+
+
 
 
         this.mp.update(launchPad)

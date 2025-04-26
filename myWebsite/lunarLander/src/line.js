@@ -4,6 +4,7 @@ export class Line{
         this.image = document.querySelector("#img_line")
         this.x = 0
         this.y = 0
+
         this.width = 70
         this.height = 3
 
