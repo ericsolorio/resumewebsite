@@ -5,8 +5,14 @@ export class SpaceCraft{
         this.image = document.querySelector("#img_SC")
         this.x = GAME.line7.x
         this.y = 550
-        this.width = 20
-        this.height = 20
+
+
+        // this.width = 20
+        // this.height = 20
+
+        this.width = 50
+        this.height = 50
+
 
         this.xVelocity = 0
         this.yVelocity = 0

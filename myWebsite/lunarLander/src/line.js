@@ -5,8 +5,11 @@ export class Line{
         this.x = 0
         this.y = 0
 
-        this.width = 70
-        this.height = 3
+        // this.width = 70
+        // this.height = 3
+
+        this.width = 80
+        this.height = 80
 
         this.angle = 0
 
