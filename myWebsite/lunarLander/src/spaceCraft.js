@@ -7,11 +7,11 @@ export class SpaceCraft{
         this.y = 550
 
 
-        // this.width = 20
-        // this.height = 20
+        this.width = 20
+        this.height = 20
 
-        this.width = 50
-        this.height = 50
+        // this.width = 50
+        // this.height = 50
 
 
         this.xVelocity = 0

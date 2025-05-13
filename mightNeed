@@ -1,0 +1,25 @@
+function basicCollision(sc, lineStorage, tempLineStorage){
+    // left and right
+    // send over if left or right
+    if(
+        (
+            sc.x + sc.width > lineStorage[tempLineStorage["left"]].x - lineStorage[tempLineStorage["left"]].width
+            && sc.x + sc.width < lineStorage[tempLineStorage["left"]].x + lineStorage[tempLineStorage["left"]].width
+            ||
+            sc.x - sc.width < lineStorage[tempLineStorage["left"]].x + lineStorage[tempLineStorage["left"]].width
+            && sc.x - sc.width > lineStorage[tempLineStorage["left"]].x - lineStorage[tempLineStorage["left"]].width
+        )
+        
+        &&
+        
+        (
+            sc.y - sc.height < lineStorage[tempLineStorage["left"]].y + lineStorage[tempLineStorage["left"]].height
+            && sc.y - sc.height > lineStorage[tempLineStorage["left"]].y - lineStorage[tempLineStorage["left"]].height
+            ||
+            sc.y + sc.height > lineStorage[tempLineStorage["left"]].y - lineStorage[tempLineStorage["left"]].height
+            && sc.y + sc.height < lineStorage[tempLineStorage["left"]].y + lineStorage[tempLineStorage["left"]].height
+
+        )
+    ){}
+
+}
