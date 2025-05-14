@@ -1,6 +1,101 @@
 import { Line } from "./line.js"
 
 
+export function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp, specificLine){
+    //compare sc with left and right line
+    //check dot product
+
+    let specificPerpList = null
+    if(specificLine == "left"){
+        specificPerpList = scAndLeftPerp
+    }
+    else{
+        specificPerpList = scAndRightPerp
+    }
+
+
+    for(let i = 0; i < specificPerpList.length; i++){
+
+        let minA = null
+        let maxA = null
+        Object.keys(sc.myVertices).forEach(vertici =>{
+            let dp = (specificPerpList[i].x * sc.myVertices[vertici].x) +
+                    (specificPerpList[i].y * sc.myVertices[vertici].y)
+            if(minA === null || dp < minA){
+                minA = dp
+            }
+            if(maxA === null || dp > maxA){
+                maxA = dp
+            }
+        })
+
+
+
+        let minB = null
+        let maxB = null
+
+        Object.keys(lineStorage[tempLineStorage[specificLine]].myVertices).forEach(vertici =>{
+
+
+            let dp = (specificPerpList[i].x * lineStorage[tempLineStorage[specificLine]].myVertices[vertici].x) +
+                    (specificPerpList[i].y * lineStorage[tempLineStorage[specificLine]].myVertices[vertici].y)
+
+            if(minB === null || dp < minB){
+                minB = dp
+            }
+            if(maxB === null || dp > maxB){
+                maxB = dp
+            }
+        })
+
+
+        //check if gap
+        // if true leave function
+        // if never true that means there colliding in that specific axis
+        if(maxA <= minB || maxB <= minA){
+            return
+        }
+        
+    }
+
+
+
+    // if for loops ends without any interuptions than colliding
+    //console.log("colliding!")
+
+
+
+    //if collided need to check if the platform is at an angle of 0 or not
+    if(lineStorage[tempLineStorage[specificLine]].angle == 0){
+        // land is flat
+        if(sc.angle > -7 && sc.angle < 7){
+            //good SC angle
+            if(sc.speed < 6){
+                // good speed
+                console.log("good landing")
+                return "goodLanding"
+            }
+            else{
+                // too fast
+                console.log("to fast")
+                return "gameover"
+            }
+        }
+        else{
+            // bad SC angle
+            console.log("angle not good")
+            return "gameover"
+        }
+    }
+    else{
+        // land is NOT flat
+        console.log("land NOT FLAT")
+        return "gameover"
+    }
+
+}
+
+
 export function getAngledCoords(xc, yc, xi, yi, angleOfLine){
     angleOfLine = angleOfLine * (Math.PI/180)
     let lenX = xi - xc
@@ -260,14 +355,4 @@ export function makeMap(GAME){
     GAME.line14.y = 493
     GAME.line14.angle = 45
     GAME.lineStorage[14] = GAME.line14
-
-
-    ///////////////////////////////////////
-    GAME.line99 = new Line()
-    GAME.line99.x = 100
-    GAME.line99.y = 150
-    GAME.line99.angle = 45
-    GAME.line99.height = 20
-    GAME.line99.width = 100
-    GAME.lineStorage[99] = GAME.line99
 }

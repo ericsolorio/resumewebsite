@@ -4,79 +4,19 @@ import { SpaceCraft } from "./spaceCraft.js"
 import { inputSC } from "./inputSC.js"
 import { wIsPressed } from "./inputSC.js"
 import { mousePointer } from "./mousePointerTesting.js"
-import { findMax, findMin, makeEdgesLines, makeEdgesSC, makeMap, makePerpVectorsLines, makePerpVectorsSC, makeVerticesLines, makeVerticesSC } from "./extraFunctions.js"
-
-
-
-
-function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp, specificLine){
-    //compare sc with left and right line
-    //check dot product
-
-    let specificPerpList = null
-    if(specificLine == "left"){
-        specificPerpList = scAndLeftPerp
-    }
-    else{
-        specificPerpList = scAndRightPerp
-    }
-
-
-    for(let i = 0; i < specificPerpList.length; i++){
-
-        let minA = null
-        let maxA = null
-        Object.keys(sc.myVertices).forEach(vertici =>{
-            let dp = (specificPerpList[i].x * sc.myVertices[vertici].x) +
-                    (specificPerpList[i].y * sc.myVertices[vertici].y)
-            if(minA === null || dp < minA){
-                minA = dp
-            }
-            if(maxA === null || dp > maxA){
-                maxA = dp
-            }
-        })
-
-
-
-        let minB = null
-        let maxB = null
-
-        Object.keys(lineStorage[tempLineStorage[specificLine]].myVertices).forEach(vertici =>{
-
-
-            let dp = (specificPerpList[i].x * lineStorage[tempLineStorage[specificLine]].myVertices[vertici].x) +
-                    (specificPerpList[i].y * lineStorage[tempLineStorage[specificLine]].myVertices[vertici].y)
-
-            if(minB === null || dp < minB){
-                minB = dp
-            }
-            if(maxB === null || dp > maxB){
-                maxB = dp
-            }
-        })
-
-
-        //check if gap
-        // if true leave function
-        // if never true that means there colliding in that specific axis
-        if(maxA <= minB || maxB <= minA){
-            return
-        }
-        
-    }
-
-    // if for loops ends without any interuptions than colliding
-    console.log("colliding!")
-}
-
+import { checkCollisionSAT, findMax, findMin, makeEdgesLines, makeEdgesSC, makeMap, makePerpVectorsLines, makePerpVectorsSC, makeVerticesLines, makeVerticesSC } from "./extraFunctions.js"
+import { LaunchPad } from "./launchPad.js"
 
 
 let scAndLeftPerp = []
 let scAndRightPerp = []
 
+
+
 export class Game{
     constructor(launchPad){
+
+        this.status = ""
 
         this.launchPad = launchPad
 
@@ -105,10 +45,10 @@ export class Game{
 
         this.sc = new SpaceCraft(this)
         this.flame = new Flame(this.sc)
-        new inputSC(this.sc)
+        new inputSC(this.sc, this)
 
 
-        this.mp = new mousePointer(launchPad)
+        //this.mp = new mousePointer(launchPad)
     }
 
 
@@ -157,13 +97,64 @@ export class Game{
         }
 
         
-        /////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        
-        checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "left")
-        checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "right")
+        launchPad.ctx.font = "20px Arial"
+        launchPad.ctx.fillStyle = "white"
+        launchPad.ctx.textAlign = "center"
 
+
+        launchPad.ctx.fillText("speed" + this.sc.speed.toFixed(1), 560, 50)
+        
+
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+
+
+
+        /////////////////////////////////////////////////////////////////////////////
+        if(this.status != "gameover"){
+            this.status = checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "left")
+        }
+        /////////////////////////////////////////////////////////////////////////
+
+
+
+        if(this.status == "gameover"){
+            launchPad.ctx.strokeStyle = "white"
+            launchPad.ctx.lineWidth = 5
+            launchPad.ctx.strokeRect((650/2) - (400/2), (650/2) - (250/2), 400, 250)
+            launchPad.ctx.fillRect((650/2) - (200/2), (650/2) - (50/2) + 40, 200, 50)
+            launchPad.ctx.fillText("MISSION FAILED", (650/2), (650/2) - (50/2))
+            launchPad.ctx.fillStyle = "black"
+            launchPad.ctx.fillText("RETRY", (650/2), (650/2) - (50/2) + 71)
+            this.sc.yVelocity = 0
+            this.sc.xVelocity = 0
+        }
+        if(this.status == "goodLanding"){
+            launchPad.ctx.fillText("good landing", 50, 50)
+        }
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////
+        if(this.status != "gameover"){
+            this.status = checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "right")
+        }
+        ////////////////////////////////////////////////////////////////////////
+
+
+
+        if(this.status == "gameover"){
+            launchPad.ctx.strokeStyle = "white"
+            launchPad.ctx.lineWidth = 5
+            launchPad.ctx.strokeRect((650/2) - (400/2), (650/2) - (250/2), 400, 250)
+            this.sc.yVelocity = 0
+            this.sc.xVelocity = 0
+        }
+        if(this.status == "goodLanding"){
+            launchPad.ctx.fillText("good landing", 50, 50)
+        }
 
         // also add basic collision 
 
@@ -185,7 +176,7 @@ export class Game{
 
 
 
-        this.mp.update(launchPad)
+        //this.mp.update(launchPad)
 
 
     }

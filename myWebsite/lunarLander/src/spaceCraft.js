@@ -4,7 +4,7 @@ export class SpaceCraft{
     constructor(GAME){
         this.image = document.querySelector("#img_SC")
         this.x = GAME.line7.x
-        this.y = 550
+        this.y = 50
 
 
         this.width = 20
@@ -16,6 +16,8 @@ export class SpaceCraft{
 
         this.xVelocity = 0
         this.yVelocity = 0
+
+        
 
         this.myVertices = {}
         this.myEdges = {}
@@ -37,12 +39,16 @@ export class SpaceCraft{
         this.angle = 0
 
     }
-    update(launchPad, game){
+    update(launchPad, GAME){
 
-        this.yVelocity += .1
+        this.speed = Math.sqrt((this.xVelocity * this.xVelocity) + (this.yVelocity * this.yVelocity))
 
-        this.x += this.xVelocity * (1/launchPad.deltaTime)
-        this.y += this.yVelocity * (1/launchPad.deltaTime)
+        if(GAME.status != "gameover"){
+            this.yVelocity += .1
+
+            this.x += this.xVelocity * (1/launchPad.deltaTime)
+            this.y += this.yVelocity * (1/launchPad.deltaTime)
+        }
 
         //
         // ctx.translate(imageCenterX, imageCenterY)
