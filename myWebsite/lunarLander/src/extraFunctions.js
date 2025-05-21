@@ -260,6 +260,10 @@ export function findMin(myVertices){
 
 
 export function goodAndFailed(GAME){
+    // How to detect click and get mouse x and y from that click
+    // this was possible with some help from OttoBotCode from Youtube.
+    // link: https://www.youtube.com/watch?v=vu2GBgKnpbQ 
+    
     GAME.launchPad.ctx.canvas.addEventListener("click", e => {
         //(650/2) - (200/2), (650/2) - (50/2) + 40
         //225, 340. (top left)
