@@ -43,7 +43,8 @@ export class SpaceCraft{
 
         this.speed = Math.sqrt((this.xVelocity * this.xVelocity) + (this.yVelocity * this.yVelocity))
 
-        if(GAME.status != "gameover"){
+        if(GAME.status == ""){
+            console.log("this is running")
             this.yVelocity += .1
 
             this.x += this.xVelocity * (1/launchPad.deltaTime)

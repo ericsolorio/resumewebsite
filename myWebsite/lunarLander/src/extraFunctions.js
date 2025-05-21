@@ -53,7 +53,7 @@ export function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPer
         // if true leave function
         // if never true that means there colliding in that specific axis
         if(maxA <= minB || maxB <= minA){
-            return
+            return ""
         }
         
     }
@@ -256,6 +256,27 @@ export function findMin(myVertices){
         
     })
     return min
+}
+
+
+export function goodAndFailed(GAME){
+    GAME.launchPad.ctx.canvas.addEventListener("click", e => {
+        //(650/2) - (200/2), (650/2) - (50/2) + 40
+        //225, 340. (top left)
+        if(GAME.status == "gameover" || GAME.status == "goodLanding"){
+            GAME.mouse_x = e.offsetX
+            GAME.mouse_y = e.offsetY
+
+            if(GAME.mouse_x > 225 && GAME.mouse_x < 425 &&
+                GAME.mouse_y > 340 && GAME.mouse_y < 390
+            ){
+                GAME.status = ""
+                GAME.launchPad.addNewGame = true
+            }
+                
+            
+        }
+    })
 }
 
 

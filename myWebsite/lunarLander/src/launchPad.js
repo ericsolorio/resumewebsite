@@ -15,10 +15,21 @@ export class LaunchPad{
         this.gameList = new Set()
         this.game = new Game(this)
         this.gameList.add(this.game)
+
+        this.addNewGame = false
     }
 
     update(deltaTime){
         this.deltaTime = deltaTime
+
+        if(this.addNewGame == true){
+            this.addNewGame = false
+            this.gameList.clear()
+            this.game = new Game(this)
+            this.gameList.add(this.game)
+        }
+
+
         this.gameList.forEach(game => {
             game.update(this)
         })

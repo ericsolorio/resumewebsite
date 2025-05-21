@@ -4,7 +4,7 @@ import { SpaceCraft } from "./spaceCraft.js"
 import { inputSC } from "./inputSC.js"
 import { wIsPressed } from "./inputSC.js"
 import { mousePointer } from "./mousePointerTesting.js"
-import { checkCollisionSAT, findMax, findMin, makeEdgesLines, makeEdgesSC, makeMap, makePerpVectorsLines, makePerpVectorsSC, makeVerticesLines, makeVerticesSC } from "./extraFunctions.js"
+import { checkCollisionSAT, findMax, findMin, goodAndFailed, makeEdgesLines, makeEdgesSC, makeMap, makePerpVectorsLines, makePerpVectorsSC, makeVerticesLines, makeVerticesSC } from "./extraFunctions.js"
 import { LaunchPad } from "./launchPad.js"
 
 
@@ -48,11 +48,16 @@ export class Game{
         new inputSC(this.sc, this)
 
 
+
+        goodAndFailed(this)
+
+
         //this.mp = new mousePointer(launchPad)
     }
 
 
     update(launchPad){
+        console.log("status: ", this.status)
         launchPad.ctx.clearRect(0,0,this.GAMEWIDTH,this.GAMEHEIGHT)
         launchPad.ctx.fillStyle = "black"
         launchPad.ctx.fillRect(0,0, this.GAMEHEIGHT,this.GAMEHEIGHT)
@@ -109,21 +114,19 @@ export class Game{
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
 
-
-
         /////////////////////////////////////////////////////////////////////////////
-        if(this.status != "gameover"){
+        if(this.status == ""){
             this.status = checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "left")
         }
+        if(this.status == ""){
+            this.status = checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "right")
+        }
         /////////////////////////////////////////////////////////////////////////
-
-
-
         if(this.status == "gameover"){
             launchPad.ctx.strokeStyle = "white"
             launchPad.ctx.lineWidth = 5
             launchPad.ctx.strokeRect((650/2) - (400/2), (650/2) - (250/2), 400, 250)
-            launchPad.ctx.fillRect((650/2) - (200/2), (650/2) - (50/2) + 40, 200, 50)
+            launchPad.ctx.fillRect((650/2) - (200/2), (650/2) - (50/2) + 40, 200, 50)    
             launchPad.ctx.fillText("MISSION FAILED", (650/2), (650/2) - (50/2))
             launchPad.ctx.fillStyle = "black"
             launchPad.ctx.fillText("RETRY", (650/2), (650/2) - (50/2) + 71)
@@ -131,37 +134,20 @@ export class Game{
             this.sc.xVelocity = 0
         }
         if(this.status == "goodLanding"){
-            launchPad.ctx.fillText("good landing", 50, 50)
-        }
-
-
-
-
-        ////////////////////////////////////////////////////////////////////////
-        if(this.status != "gameover"){
-            this.status = checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "right")
-        }
-        ////////////////////////////////////////////////////////////////////////
-
-
-
-        if(this.status == "gameover"){
             launchPad.ctx.strokeStyle = "white"
             launchPad.ctx.lineWidth = 5
             launchPad.ctx.strokeRect((650/2) - (400/2), (650/2) - (250/2), 400, 250)
+            launchPad.ctx.fillRect((650/2) - (200/2), (650/2) - (50/2) + 40, 200, 50)    
+            launchPad.ctx.fillText("GOOD LANDING", (650/2), (650/2) - (50/2))
+            launchPad.ctx.fillStyle = "black"
+            launchPad.ctx.fillText("RETRY", (650/2), (650/2) - (50/2) + 71)
             this.sc.yVelocity = 0
             this.sc.xVelocity = 0
         }
-        if(this.status == "goodLanding"){
-            launchPad.ctx.fillText("good landing", 50, 50)
-        }
-
-        // also add basic collision 
 
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
-
 
 
         //google ai help, how to iterate over dictionary
