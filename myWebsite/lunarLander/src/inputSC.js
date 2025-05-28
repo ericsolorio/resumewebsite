@@ -1,30 +1,34 @@
 // Lunar Lander
-export let wIsPressed = false
+
+
+//this concept of storing the active keys in a dictionary/object list
+// came from Google AI
+
 export function inputSC(sc, GAME){
     document.addEventListener("keydown", e =>{
         if(GAME.status != "gameover"){
             if(e.key == "w"){
-                
-                if(sc.yVelocity > -10){
-                    sc.xVelocity += .6 * Math.sin(sc.angle * (Math.PI/180))
-                    sc.yVelocity -= .6 * Math.cos(sc.angle * (Math.PI/180))
-                }
-
-                wIsPressed = true
-
+                sc.keysPressed["w"] = true
             }
             if(e.key == "a" && sc.angle > -90){
-                sc.angle -= 3
+                sc.keysPressed["a"] = true
             }
             if(e.key == "d" && sc.angle < 90){
-                sc.angle += 3
+                sc.keysPressed["d"] = true
             }
         }
     })
 
     document.addEventListener("keyup", e =>{
         if(e.key == "w" && GAME.status != "gameover"){
-            wIsPressed = false
+            sc.keysPressed["w"] = false
         }
+        if(e.key == "a" && GAME.status != "gameover"){
+            sc.keysPressed["a"] = false
+        }
+        if(e.key == "d" && GAME.status != "gameover"){
+            sc.keysPressed["d"] = false
+        }
+
     })
 }

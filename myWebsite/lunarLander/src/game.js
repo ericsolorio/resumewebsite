@@ -2,7 +2,6 @@
 import { Flame } from "./flame.js"
 import { SpaceCraft } from "./spaceCraft.js"
 import { inputSC } from "./inputSC.js"
-import { wIsPressed } from "./inputSC.js"
 import { mousePointer } from "./mousePointerTesting.js"
 import { checkCollisionSAT, findMax, findMin, goodAndFailed, makeEdgesLines, makeEdgesSC, makeMap, makePerpVectorsLines, makePerpVectorsSC, makeVerticesLines, makeVerticesSC } from "./extraFunctions.js"
 import { LaunchPad } from "./launchPad.js"
@@ -17,6 +16,8 @@ export class Game{
     constructor(launchPad){
 
         this.status = ""
+        this.gameoverMessage = ""
+        this.outOfBounds = false
 
         this.launchPad = launchPad
 
@@ -57,15 +58,15 @@ export class Game{
 
 
     update(launchPad){
-        console.log("status: ", this.status)
+        //console.log("status: ", this.status)
         launchPad.ctx.clearRect(0,0,this.GAMEWIDTH,this.GAMEHEIGHT)
         launchPad.ctx.fillStyle = "black"
         launchPad.ctx.fillRect(0,0, this.GAMEHEIGHT,this.GAMEHEIGHT)
 
-        if(this.flame.size < 1 && wIsPressed){
+        if(this.flame.size < 1 && this.sc.keysPressed["w"] == true){
             this.flame.size += 0.01
         }
-        if (this.flame.size > 0.2 && !wIsPressed){
+        if (this.flame.size > 0.2 && this.sc.keysPressed["w"] == false){
             this.flame.size -= 0.01
         }
 
@@ -92,6 +93,10 @@ export class Game{
 
         
 
+
+        
+        
+        
         if(this.sc.x > findMax(this.lineStorage[this.tempLineStorage["right"]].myVertices)){ 
             this.tempLineStorage["left"] = this.tempLineStorage["right"]
             this.tempLineStorage["right"] = (this.tempLineStorage["right"] + 1)
@@ -101,13 +106,29 @@ export class Game{
             this.tempLineStorage["left"] = (this.tempLineStorage["left"] - 1)
         }
 
+        //how to get length of javascript object helped from Google AI
+        if(this.tempLineStorage["right"] >= Object.keys(this.lineStorage).length){
+            this.outOfBounds = true
+            this.tempLineStorage["right"] = 0
+        }
+        if(this.tempLineStorage["left"] < 0){
+            this.outOfBounds = true
+            this.tempLineStorage["left"] = Object.keys(this.lineStorage).length - 1
+        }
+        
+        
+    
+        
         
         launchPad.ctx.font = "20px Arial"
         launchPad.ctx.fillStyle = "white"
         launchPad.ctx.textAlign = "center"
 
 
-        launchPad.ctx.fillText("speed" + this.sc.speed.toFixed(1), 560, 50)
+        launchPad.ctx.fillText("speed: " + this.sc.speed.toFixed(1), 560, 50)
+        launchPad.ctx.fillText("angle: " + this.sc.angle, 560, 80)
+        launchPad.ctx.fillText("x pos: " + this.sc.x.toFixed(1), 560, 110)
+        launchPad.ctx.fillText("y pos: " + this.sc.y.toFixed(1), 560, 140)
         
 
         /////////////////////////////////////////////////////////////////////////////////
@@ -115,11 +136,16 @@ export class Game{
         /////////////////////////////////////////////////////////////////////////////////
 
         /////////////////////////////////////////////////////////////////////////////
+
         if(this.status == ""){
-            this.status = checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "left")
+            this.status = checkCollisionSAT(this, this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "left")
         }
         if(this.status == ""){
-            this.status = checkCollisionSAT(this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "right")
+            this.status = checkCollisionSAT(this, this.sc, this.lineStorage, this.tempLineStorage, scAndLeftPerp, scAndRightPerp, "right")
+        }
+        if(this.outOfBounds){
+            this.status = "gameover"
+            this.gameoverMessage = "OUT OF BOUNDS"
         }
         /////////////////////////////////////////////////////////////////////////
         if(this.status == "gameover"){
@@ -128,6 +154,9 @@ export class Game{
             launchPad.ctx.strokeRect((650/2) - (400/2), (650/2) - (250/2), 400, 250)
             launchPad.ctx.fillRect((650/2) - (200/2), (650/2) - (50/2) + 40, 200, 50)    
             launchPad.ctx.fillText("MISSION FAILED", (650/2), (650/2) - (50/2))
+
+            launchPad.ctx.fillText(this.gameoverMessage, (650/2), (650/2) - (120/2))
+
             launchPad.ctx.fillStyle = "black"
             launchPad.ctx.fillText("RETRY", (650/2), (650/2) - (50/2) + 71)
             this.sc.yVelocity = 0

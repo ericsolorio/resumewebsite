@@ -23,6 +23,8 @@ export class SpaceCraft{
         this.myEdges = {}
         this.myPerpVectors = {}
 
+        this.keysPressed = {}
+
 
         // this.left = false
         // this.right = false
@@ -43,8 +45,25 @@ export class SpaceCraft{
 
         this.speed = Math.sqrt((this.xVelocity * this.xVelocity) + (this.yVelocity * this.yVelocity))
 
+
+        if(this.keysPressed["w"] == true){
+            if(this.yVelocity > -10){
+                this.xVelocity += .6 * Math.sin(this.angle * (Math.PI/180))
+                this.yVelocity -= .6 * Math.cos(this.angle * (Math.PI/180))
+            }
+        }
+
+        if(this.keysPressed["a"] == true && this.angle > -90){
+            this.angle -=3
+        }
+
+        if(this.keysPressed["d"] == true && this.angle < 90){
+            this.angle +=3
+        }
+
+
         if(GAME.status == ""){
-            console.log("this is running")
+            //console.log("this is running")
             this.yVelocity += .1
 
             this.x += this.xVelocity * (1/launchPad.deltaTime)

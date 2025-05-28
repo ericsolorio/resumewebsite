@@ -1,7 +1,8 @@
+import { Game } from "./game.js"
 import { Line } from "./line.js"
 
 
-export function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp, specificLine){
+export function checkCollisionSAT(GAME, sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp, specificLine){
     //compare sc with left and right line
     //check dot product
 
@@ -77,19 +78,22 @@ export function checkCollisionSAT(sc, lineStorage, tempLineStorage, scAndLeftPer
             }
             else{
                 // too fast
-                console.log("to fast")
+                console.log("too fast")
+                GAME.gameoverMessage = "Too Fast"
                 return "gameover"
             }
         }
         else{
             // bad SC angle
             console.log("angle not good")
+            GAME.gameoverMessage = "Angle Not Good"
             return "gameover"
         }
     }
     else{
         // land is NOT flat
         console.log("land NOT FLAT")
+        GAME.gameoverMessage = "Land Not Flat"
         return "gameover"
     }
 
