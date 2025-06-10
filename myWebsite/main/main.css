@@ -1,3 +1,38 @@
+body{
+    margin: 0;
+}
+
+/* how to use background properties
+    help from Kevin Powell
+    video from Youtube: Background images with HTML & CSS
+ */
+.mainImage{
+    width: auto;
+    height: 65%;
+    background-image: url("../sfLowNew.jpg");
+    background-size: cover;
+    background-position-y: 85%;
+}
+
+.mainContainer{
+    display: grid;
+    justify-content: center;
+    object-position: center;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
+
+.Topic{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 10px solid black;
+    margin-top: 200px;
+}
+
 .GamesTable{
     margin: auto;
     width: 900px;
