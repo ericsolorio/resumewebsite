@@ -57,9 +57,21 @@ function whoWon()
 
 function putLine(idName)
 {
+    console.log(idName)
     let img = document.createElement("img");
     img.className = "line";
-    img.src = "tictactoe/images/line.png";
+    if(idName[0] == "V"){
+        img.src = "tictactoe/images/vLine.png";
+    }
+    else if(idName[0] == "H"){
+        img.src = "tictactoe/images/hLine.png";
+    }
+    else if(idName == "strikeDL"){
+        img.src = "tictactoe/images/dlLine.png";
+    }
+    else{
+        img.src = "tictactoe/images/drLine.png";
+    }
     img.id = idName;
     document.querySelector(".tactable").appendChild(img);
 }
@@ -87,7 +99,7 @@ function horizontalCheck()
             // i will either be 0,1,2. Depending on row.
             if(count == 3)
             {
-                let idName = "strikeH" + i.toString();
+                let idName = "Hstrike" + i.toString();
                 putLine(idName);
                 whoWon();
                 return true;
@@ -127,7 +139,7 @@ function verticalCheck()
 
             if(count == 3)
             {
-                let idName = "strikeV" + i.toString();
+                let idName = "Vstrike" + i.toString();
                 putLine(idName);
                 whoWon();
                 return true;
@@ -392,7 +404,7 @@ export function boxClick(box)
 
         tieCheck();
 
-        someAI();
+        //someAI();
         
         if(check())
         {

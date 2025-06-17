@@ -14,29 +14,61 @@ body{
     background-position-y: 85%;
 }
 
-.mainContainer{
-    display: grid;
-    justify-content: center;
-    object-position: center;
-}
-
 h1{
     display: flex;
     justify-content: center;
 }
 
-.Topic{
+#ABOUTME h2{
+    margin-left: 10%;
+}
+#ABOUTME div{
+    margin-left: 20%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    border: 10px solid black;
+}
+
+.Topic{
+    background-color: #E3E3E3;
+
+    display: flex;
     margin-top: 200px;
 }
 
+.Topic > img{
+    width: 33%;
+    height: 100%;
+}
+
+.Topic.Left > div{
+    margin-left: 32%;
+}
+.Topic.Right > img{
+    margin-left: auto;
+}
+.Topic.Right > div{
+    margin-left: 10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .GamesTable{
-    margin: auto;
-    width: 900px;
-    height: 200px;
+    margin-left: 50%;
+    transform: translate(-50%, 0%);
+    width: 65%;
+    height: 30%;
     background-color: grey;
 
     display: flex;
@@ -44,38 +76,51 @@ h1{
     align-items: center;
 }
 .GamesTableBox{
-    width: 150px;
-    height: 150px;
+    width: 15%;
+    height: 70%;
     background-color: white;   
 }
 
 
+/* this is where i left off 6-12-25 */
 .gameExitBox{
-    width: 500;
-    height: 600;
     background-color:aliceblue;
-    position: fixed;
 
-    /* display: flex;
-    justify-content: right; */
-
-    z-index: 9;
-    left: 50%;
+    width: 75%;
+    height: 95%;
     top: 50%;
-    transform: scale(0);
+    left: 50%;
+    transform: scale(0) translate(-50%,-50%);
+    position: fixed;
+    
+    
+    display: flex;
+    flex-direction: column;
+    
+    
+    z-index: 1;
+
+
+
 }
 .gameExitBox.active{
-    transform: translate(-50%,-50%) scale(1);
-}
-.gameExitBox.active.si{
-    width: 650;
-    height: 690;
-    transform: translate(-50%,-50%) scale(1);
+    transform: scale(1) translate(-50%,-50%);
 }
 .gameExitBox #exitButton{
     width: 20px;
     height: 20px;
 }
+
+
+
+canvas{
+    width: 92%;
+    height: 94%;
+    margin-left: 50%;
+    transform: translate(-50%,0);
+}
+
+
 
 
 /* margin 0 auto needs width for div to center
