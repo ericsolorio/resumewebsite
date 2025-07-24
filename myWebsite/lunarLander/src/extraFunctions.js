@@ -266,17 +266,45 @@ export function findMin(myVertices){
 export function goodAndFailed(GAME){
     // How to detect click and get mouse x and y from that click
     // this was possible with some help from OttoBotCode from Youtube.
-    // link: https://www.youtube.com/watch?v=vu2GBgKnpbQ 
+    // link: https://www.youtube.com/watch?v=vu2GBgKnpbQ
+    
     
     GAME.launchPad.ctx.canvas.addEventListener("click", e => {
-        //(650/2) - (200/2), (650/2) - (50/2) + 40
-        //225, 340. (top left)
+
+        let canvasDimensions = GAME.launchPad.canvas.getBoundingClientRect()
+
         if(GAME.status == "gameover" || GAME.status == "goodLanding"){
             GAME.mouse_x = e.offsetX
             GAME.mouse_y = e.offsetY
 
-            if(GAME.mouse_x > 225 && GAME.mouse_x < 425 &&
-                GAME.mouse_y > 340 && GAME.mouse_y < 390
+            console.log("mousex: ", GAME.mouse_x, "mousey: ", GAME.mouse_y)
+
+            //okay new width is (dimensions.width)/650 * (small box -> 200)
+            // new heigth is (dimensions.height)/650 * (smallbox height -> 50)
+
+            //new x and y
+
+            //dimensions.width/2 - newWidth/2
+            //dimensions.heigth/2 - newHeigth/2
+
+
+            let newWidth = (canvasDimensions.width)/650 * 200
+            let newHeight = (canvasDimensions.height)/650 * 50
+
+            let newXPos = (canvasDimensions.width/2) - (newWidth/2)
+            // the y needs to offset because box not perfectly centered.
+            let newYPos = (canvasDimensions.height * .525)
+
+            
+            // console.log("newWidth: ", newWidth, "newHeigth: ", newHeight)
+            // console.log("newXPos: ", newXPos,"newYPos: ", newYPos)
+
+            console.log("start x: ", newXPos, "end x: ", newXPos + newWidth)
+            console.log("start y : ", newYPos, "end of y: ", newYPos + newHeight)
+
+
+            if(GAME.mouse_x > newXPos && GAME.mouse_x < newXPos + newWidth &&
+                GAME.mouse_y > newYPos && GAME.mouse_y < newYPos + newHeight
             ){
                 GAME.status = ""
                 GAME.launchPad.addNewGame = true

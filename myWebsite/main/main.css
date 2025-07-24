@@ -1,5 +1,10 @@
 body{
     margin: 0;
+    /* overflow-x hides the horizontal scroll bar created by the animations */
+    overflow-x: hidden;
+    background-color: #B7D5F4;
+
+    font-family: "Calistoga";
 }
 
 /* how to use background properties
@@ -8,78 +13,202 @@ body{
  */
 .mainImage{
     width: auto;
-    height: 65%;
-    background-image: url("../sfLowNew.jpg");
+    height: 70%;
+    background-image: url("../mainImg.jpg");
     background-size: cover;
-    background-position-y: 85%;
+    /* background-position-y: 50%; */
+    background-position: 50% 25%
 }
 
-h1{
-    display: flex;
-    justify-content: center;
-}
 
-#ABOUTME h2{
-    margin-left: 10%;
-}
-#ABOUTME div{
-    margin-left: 20%;
-    display: flex;
-    align-items: center;
-}
 
-.Topic{
-    background-color: #E3E3E3;
-
-    display: flex;
-    margin-top: 200px;
-}
-
-.Topic > img{
-    width: 33%;
-    height: 100%;
-}
-
-.Topic.Left > div{
-    margin-left: 32%;
-}
-.Topic.Right > img{
+.ABOUTME{
     margin-left: auto;
-}
-.Topic.Right > div{
-    margin-left: 10%;
-}
+    margin-right: auto;
+    margin-top: 10%;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.GamesTable{
-    margin-left: 50%;
-    transform: translate(-50%, 0%);
-    width: 65%;
-    height: 30%;
-    background-color: grey;
+    background-color: #E6A42A;
+    height: 50%;
+    width: 90%;
 
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    
+    border-radius: 4%/10%;
 }
-.GamesTableBox{
-    width: 15%;
+#aboutmeparagraph{
+    background-color: #FBFDEA;
+    width: 89%;
+    height: 90%;
+
+    border-radius: 4%/10%;
+}
+#aboutmeparagraph > p{
+    margin-left: 2%;
+}
+#aboutmetitle{
+    width: 6%;
+    margin-right: 1%;
+    align-self: flex-start;
+}
+#aboutmetitle >h2{
+    color: #FBFDEA;
+    letter-spacing: 0.05rem;
+    font-weight: normal;
+}
+
+
+
+
+
+
+
+
+.Topic{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    margin-top: 15%;
+    height: 60%;
+}
+.Topic > div{
+    height: 100%;
+    width: 40%;
+    background-color: #FBFDEA;
+    border-radius: 5%/5%;
+} 
+
+.Topic > div > h2{
+    text-align: center;
+}
+.Topic > div > p{
+    color: C87C00;
+    margin-left: 5%;
+}
+.Topic > img{
+    width: 30%;
     height: 70%;
-    background-color: white;   
+    border-radius: 5%/5%;
 }
+
+
+.Topic.Left.Inter{
+    animation: moveTopicRight 1.5s;
+}
+
+@keyframes moveTopicRight{
+    from{
+        transform: translate(-75%,0);
+    }
+    to{
+        transform: translate(0,0);
+    }
+}
+
+.Topic.Right.Inter{
+    animation: moveTopicLeft 1.5s;
+}
+
+@keyframes moveTopicLeft{
+    from{
+        transform: translate(75%,0);
+    }
+    to{
+        transform: translate(0,0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+.GameArea{
+    width: 100%;
+    height: 100%;
+    margin-top: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+.GameBox{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.GameBox .Game{
+    width: 14%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10%/15%;
+}
+.GameBox .details{
+    background-color: #FBFDEA;
+    width: 65%;
+    height: 100%;
+    border-radius: 2%/15%;
+}
+
+.Game.one{
+    background-image: url("../thumbnailTTT.png");
+}
+.Game.one.Inter{
+    transform: translate(800%,0%);
+    animation: moveStackedGames 1s forwards;
+    animation-timing-function: ease-out;
+    animation-delay: 0.2s;
+}
+.Game.two{
+    background-image: url("../thumbnailSI.png");
+}
+.GameBox .area2{
+    width: 35%;
+    border-radius: 5%/20%;
+}
+.Game.two.Inter{
+    transform: translate(600%,0%);
+    animation: moveStackedGames 1s forwards;
+    animation-timing-function: ease-out;
+    animation-delay: 0.4s;
+}
+.Game.three{
+    background-image: url("../thumbnailLL.png");
+}
+.Game.three.Inter{
+    transform: translate(200%,0%);
+    animation: moveStackedGames 1s forwards;
+    animation-timing-function: ease-out;
+    animation-delay: 0.6s;
+}
+
+@keyframes moveStackedGames{
+    to{
+        transform: translate(0%, 0%);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* this is where i left off 6-12-25 */
@@ -114,7 +243,7 @@ h1{
 
 
 canvas{
-    width: 92%;
+    width: 65%;
     height: 94%;
     margin-left: 50%;
     transform: translate(-50%,0);
@@ -145,4 +274,11 @@ canvas{
 .Overlay.active{
     opacity: 0.5;
     pointer-events: all;
+}
+
+
+
+
+footer{
+    height: 20%;
 }

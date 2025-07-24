@@ -404,7 +404,7 @@ export function boxClick(box)
 
         tieCheck();
 
-        //someAI();
+        someAI();
         
         if(check())
         {

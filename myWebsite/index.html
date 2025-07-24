@@ -6,19 +6,26 @@
     <link rel = "stylesheet" href = "main/main.css">
     <link rel = "stylesheet" href = "tictactoe/tictactoe.css">
     <link rel = "stylesheet" href = "spaceInvaders/styling.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="mainImage"></div>
     <div class="mainContainer">
-        <h1>Welcome to Eric's website</h1>
-
-        <div class = "Topic" id = "ABOUTME">
-            <h2>About Me</h2>
-            <div>
+        
+        <div class = "ABOUTME">
+            <div id="aboutmeparagraph">
                 <p>This website will contain info about me. Who I am. Maybe some games. Ye</p>
             </div>
+            <div id ="aboutmetitle">
+                <h2>About Me</h2>
+            </div>
         </div>
+
 
 
         <!-- name one class left and the other right
@@ -41,11 +48,25 @@
             <img src="sfLowNew.jpg">
         </div>
 
-        <div class="GamesTable">
-            <div class ="GamesTableBox" id = "game1"></div>
-            <div class ="GamesTableBox" id = "game2"></div>
-            <div class ="GamesTableBox" id = "game3"></div>
+        <div class="GameArea">
+            <div class ="GameBox">
+                <div class = "Game one"></div>
+                <div class = "details"><p></p></div>
+            </div>
+            <div class ="GameBox">
+                <div class="details area2"><p></p></div>
+                <div class = "Game two" ></div>
+                <div class="details area2"><p></p></div>
+            </div>
+            <div class ="GameBox">
+                <div class = "details"><p></p></div>
+                <div class = "Game three"></div>
+            </div>
         </div>
+
+
+
+
         <div class="gameExitBox">
             <button id="exitButton">x</button>
         </div>
@@ -73,5 +94,6 @@
     </div>
 
     <div class = "Overlay"></div>
+    <footer> </footer>
 
 </body>

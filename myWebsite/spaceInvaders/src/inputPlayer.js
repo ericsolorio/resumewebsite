@@ -6,10 +6,10 @@ export default class InputPlayer{
         //how player is controlled with keyboard
         document.addEventListener("keydown", e =>{
             if(e.key == "a"){
-                player.speed = -500;
+                player.speed = -200;
             }
             if(e.key == "d"){
-                player.speed = 500;
+                player.speed = 200;
             }
             if(e.key == " "){
                 spawnPlayerBullet(game)

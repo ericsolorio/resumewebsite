@@ -6,6 +6,48 @@ export let isLPActive = false;
 export let isLPActiveLL = false;
 import * as tac from "../tictactoe/tictactoe.js";
 
+
+///////////////////////////////////////////
+//animations start
+
+//understood IntersectObserver by 
+// Steve Griffith - Prof3ssorSt3v3
+// https://www.youtube.com/watch?v=gQ8WggeHoJU
+
+
+let observer = new IntersectionObserver(divAnimation, {rootMargin: '30%'})
+
+let divTopics = document.querySelectorAll(".Topic")
+divTopics.forEach(Topic=>{
+    observer.observe(Topic)
+})
+
+observer.observe(document.querySelector(".GameArea"))
+
+document.querySelectorAll(".Game").forEach(Box =>{
+    observer.observe(Box)
+})
+
+function divAnimation(entries, ob){
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("Inter")
+        }
+        else{
+            entry.target.classList.remove("Inter")
+        }
+    })
+}
+
+
+
+
+// animation end
+//////////////////////////////////////////
+
+
+
+
 const gameExitBox = document.querySelector(".gameExitBox")
 let img0 = null
 let img1 = null

@@ -21,6 +21,13 @@ export class Game{
 
         this.launchPad = launchPad
 
+        // ///
+        // this.launchPad.canvas.addEventListener("hover", e => {
+        //     e.mouse
+        //     console.log("mousex: ", GAME.mouse_x, "mousey: ", GAME.mouse_y)
+        // })
+        // ///
+
         this.GAMEHEIGHT = 650
         this.GAMEWIDTH = 650
 
@@ -152,7 +159,7 @@ export class Game{
             launchPad.ctx.strokeStyle = "white"
             launchPad.ctx.lineWidth = 5
             launchPad.ctx.strokeRect((650/2) - (400/2), (650/2) - (250/2), 400, 250)
-            launchPad.ctx.fillRect((650/2) - (200/2), (650/2) - (50/2) + 40, 200, 50)    
+            launchPad.ctx.fillRect((this.GAMEWIDTH/2) - (200/2), (this.GAMEHEIGHT/2) - (50/2) + 40, 200, 50)    
             launchPad.ctx.fillText("MISSION FAILED", (650/2), (650/2) - (50/2))
 
             launchPad.ctx.fillText(this.gameoverMessage, (650/2), (650/2) - (120/2))
