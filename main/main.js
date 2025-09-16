@@ -173,7 +173,7 @@ function makeLL(){
 
     img0 = document.createElement("img")
     img0.id = "img_SC"
-    img0.src = "lunarLander/images/newSpaceShip.png"
+    img0.src = "lunarLander/images/newSpaceship.png"
     img0.classList.add("llImg")
 
     img1 = document.createElement("img")
