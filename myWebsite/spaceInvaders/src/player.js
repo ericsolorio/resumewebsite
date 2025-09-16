@@ -25,6 +25,8 @@ export default class Player{
 
         this.x += this.speed * (1/launchPad.deltaTime);
 
+        // launchPad.ctx.fillStyle = "red"
+        // launchPad.ctx.fillRect(this.x, this.y, 10, 10)
         launchPad.ctx.drawImage(this.img_player, this.x, this.y, this.width, this.height)        
     }
 }

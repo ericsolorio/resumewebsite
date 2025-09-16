@@ -8,6 +8,111 @@ import * as tac from "../tictactoe/tictactoe.js";
 
 
 ///////////////////////////////////////////
+///////////////////////////////////////////
+///////////////////////////////////////////
+//imgslideshow
+
+let leftButtonFAITH = document.querySelector(".Topic.Left#FAITH .leftButton")
+let rightButtonFAITH = document.querySelector(".Topic.Left#FAITH .rightButton")
+let faithImgs = document.querySelectorAll(".faithImgs")
+let j = 0
+
+leftButtonFAITH.addEventListener("click", ()=>{
+    j += 1
+    if(j <= 0){
+        let calcNum = j * 100
+        faithImgs.forEach(img=>{
+            img.animate([
+                    {transform: `translateX(${calcNum}%)`}
+                ],
+                {
+                    duration: 1000,
+                    fill: 'forwards'
+                }
+            )
+        })
+    }
+    else{
+        j--
+    }
+})
+
+rightButtonFAITH.addEventListener("click", ()=>{
+    j -= 1
+    if(j >= -1){
+        let calcNum = j * 100
+        faithImgs.forEach(img=>{
+            img.animate([
+                    {transform: `translateX(${calcNum}%)`}
+                ],
+                {
+                    duration: 1000,
+                    fill: 'forwards'
+                }
+            )
+        })
+    }
+    else{
+        j++
+    }
+})
+
+
+//thanks to Google Gemini for specific query selector
+let leftButton = document.querySelector(".Topic.Left#CFA .leftButton")
+let rightButton = document.querySelector(".Topic.Left#CFA .rightButton")
+let cfaImgs = document.querySelectorAll(".cfaImgs")
+let i = 0
+
+
+leftButton.addEventListener("click", ()=>{
+    i += 1
+    if(i <= 0){
+        let calcNum = i * 100
+        cfaImgs.forEach(img=>{
+            img.animate([
+                    {transform: `translateX(${calcNum}%)`}
+                ],
+                {
+                    duration: 1000,
+                    fill: 'forwards'
+                }
+            )
+        })
+    }
+    else{
+        i--
+    }
+})
+
+rightButton.addEventListener("click", ()=>{
+    i -= 1
+    if(i >= -15){
+        let calcNum = i * 100
+        cfaImgs.forEach(img=>{
+            img.animate([
+                    {transform: `translateX(${calcNum}%)`}
+                ],
+                {
+                    duration: 1000,
+                    fill: 'forwards'
+                }
+            )
+        })
+    }
+    else{
+        i++
+    }
+})
+
+
+//img slideshow
+///////////////////////////////////////////
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+
+///////////////////////////////////////////
 //animations start
 
 //understood IntersectObserver by 
@@ -15,14 +120,14 @@ import * as tac from "../tictactoe/tictactoe.js";
 // https://www.youtube.com/watch?v=gQ8WggeHoJU
 
 
-let observer = new IntersectionObserver(divAnimation, {rootMargin: '30%'})
+let observer = new IntersectionObserver(divAnimation, {rootMargin: "-25% 200%"})
 
 let divTopics = document.querySelectorAll(".Topic")
 divTopics.forEach(Topic=>{
     observer.observe(Topic)
 })
 
-observer.observe(document.querySelector(".GameArea"))
+// observer.observe(document.querySelector(".GameArea"))
 
 document.querySelectorAll(".Game").forEach(Box =>{
     observer.observe(Box)
@@ -32,10 +137,11 @@ function divAnimation(entries, ob){
     entries.forEach(entry=>{
         if(entry.isIntersecting){
             entry.target.classList.add("Inter")
+            ob.unobserve(entry.target)
         }
-        else{
-            entry.target.classList.remove("Inter")
-        }
+        // else{
+        //     // entry.target.classList.remove("Inter")
+        // }
     })
 }
 
@@ -67,7 +173,7 @@ function makeLL(){
 
     img0 = document.createElement("img")
     img0.id = "img_SC"
-    img0.src = "lunarLander/images/spaceCraft.png"
+    img0.src = "lunarLander/images/newSpaceShip.png"
     img0.classList.add("llImg")
 
     img1 = document.createElement("img")
@@ -83,7 +189,7 @@ function makeLL(){
     img3 = document.createElement("img")
     img3.id = "img_mousePointer"
     img3.src = "lunarLander/images/mousePointer.png"
-    img2.classList.add("llImg")
+    img3.classList.add("llImg")
 
     document.body.append(img0)
     document.body.append(img1)
@@ -94,6 +200,13 @@ function makeLL(){
     gameExitBox.append(canvas)
 }
 
+// clicking spacebar
+function turnOffSpace(e){
+    console.log("hi")
+    if(e.key == " "){
+        e.preventDefault()
+    }
+}
 
 function makeSI(){
     let canvas = document.createElement("canvas")
@@ -128,6 +241,7 @@ function makeSI(){
     document.body.append(img0,img1,img2,img3)
     gameExitBox.append(canvas)
     
+    document.addEventListener("keydown", turnOffSpace)
 }
 
 
@@ -197,7 +311,7 @@ function makeTac(){
 ////////////////////////////////////////////////////////////////////////////////////
 
 
-const gameBoxes = document.querySelectorAll(".GamesTableBox")
+const gameBoxes = document.querySelectorAll(".Game")
 const overlay = document.querySelector(".Overlay");
 const exitButton = document.querySelector("#exitButton")
 
@@ -209,17 +323,17 @@ gameBoxes.forEach(box => {
         overlay.classList.add("active")
         gameExitBox.classList.add("active")
 
-        if(box.id == "game1"){
+        if(box.className == "Game one Inter"){
             makeTac()
             gameExitBox.appendChild(tactable)
             tactable.classList.add("active")
         }
-        if(box.id == "game2"){
+        if(box.className == "Game two Inter"){
             makeSI()
             isLPActive = true
             gameExitBox.classList.add("si")
         }
-        if(box.id == "game3"){
+        if(box.className == "Game three Inter"){
             makeLL()
             isLPActiveLL = true
         }
@@ -264,6 +378,8 @@ function closeGame(){
         document.body.removeChild(img1)
         document.body.removeChild(img2)
         document.body.removeChild(img3)
+
+        document.removeEventListener("keydown", turnOffSpace)
     }
 
     if(document.querySelector("#llGameScreen")){
@@ -277,6 +393,7 @@ function closeGame(){
         document.body.removeChild(img0)
         document.body.removeChild(img1)
         document.body.removeChild(img2)
+        document.body.removeChild(img3)
 
     }
     

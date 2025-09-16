@@ -70,23 +70,16 @@ export class SpaceCraft{
             this.y += this.yVelocity * (1/launchPad.deltaTime)
         }
 
-        //
-        // ctx.translate(imageCenterX, imageCenterY)
-        // ctx.rotate(rotationAngleToRadians)
-        // ctx.drawImage(Image, -imageCenterX, -imageCenterY)
-        //
-
-        //launchPad.ctx.translate(this.imageCenterX, this.imageCenterY)
-        //launchPad.ctx.rotate(180 * (3.16/180))
-
-        //launchPad.ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
-
-
+        
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         //EVERYONE STOP, THE ROTATING WAS ONLY POSSIBLE BC OF Luis Estrada FROM GAMEDEV.STACKEXCHANGE
         // THE URL IS: https://gamedev.stackexchange.com/questions/67274/how-to-rotate-an-image-on-an-html5-canvas-without-rotating-the-whole-canvas 
         // THIS IS VERY IMPORTANT
+        // DIRECT CODE FROM Luis Estrada AND HEAVILY INFLUENCED
+        // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        // THE CODE DOWN HERE
+        // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
 

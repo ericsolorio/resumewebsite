@@ -21,6 +21,21 @@ export class Flame{
         this.x = this.spaceCraft.x + (30 * -Math.sin(this.spaceCraft.angle * (Math.PI / 180)))
         this.y = this.spaceCraft.y + (30 * Math.cos(this.spaceCraft.angle * (Math.PI / 180)))
 
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //EVERYONE STOP, THE ROTATING WAS ONLY POSSIBLE BC OF Luis Estrada FROM GAMEDEV.STACKEXCHANGE
+        // THE URL IS: https://gamedev.stackexchange.com/questions/67274/how-to-rotate-an-image-on-an-html5-canvas-without-rotating-the-whole-canvas 
+        // THIS IS VERY IMPORTANT
+        // DIRECT CODE FROM Luis Estrada AND HEAVILY INFLUENCED
+        // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        // THE CODE DOWN HERE
+        // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+
         launchPad.ctx.save()
         launchPad.ctx.translate(this.x, this.y)
         launchPad.ctx.rotate(this.spaceCraft.angle * (Math.PI/180))

@@ -14,7 +14,7 @@ body{
 .mainImage{
     width: auto;
     height: 70%;
-    background-image: url("../mainImg.jpg");
+    background-image: url("./images/mainImg.jpg");
     background-size: cover;
     /* background-position-y: 50%; */
     background-position: 50% 25%
@@ -43,10 +43,30 @@ body{
     height: 90%;
 
     border-radius: 4%/10%;
+
+    /* overflow-y: auto; */
 }
 #aboutmeparagraph > p{
+
+    height: 88%;
+    width: 96.5%;
+    overflow-y: auto;
+
     margin-left: 2%;
+    letter-spacing: 0.03rem;
+    font-size: 1.2rem;
 }
+#aboutmeparagraph > p::-webkit-scrollbar{
+    width: .45rem;
+}
+#aboutmeparagraph > p::-webkit-scrollbar-thumb{
+    background: gray;
+    border-radius: 80%/5%;
+}
+#aboutmeparagraph > p::-webkit-scrollbar-button{
+    display: none;
+}
+
 #aboutmetitle{
     width: 6%;
     margin-right: 1%;
@@ -71,56 +91,112 @@ body{
     justify-content: space-around;
 
     margin-top: 15%;
-    height: 60%;
+    height: 80%;
 }
-.Topic > div{
+
+
+.Topic .TopicDes{
     height: 100%;
-    width: 40%;
+    width: 47%;
     background-color: #FBFDEA;
     border-radius: 5%/5%;
-} 
+}
 
-.Topic > div > h2{
+.Topic .topicDes > p{
+    height: 82%;
+    width: 94%;
+    overflow-y: auto;
+
+    color: C87C00;
+    margin-left: 4%;
+    font-size: 1.2rem;
+    letter-spacing: 0.03rem;
+}
+
+
+.Topic .topicDes > p::-webkit-scrollbar{
+    width: .45rem;
+    /* opacity though wooo */
+}
+.Topic .topicDes > p::-webkit-scrollbar-thumb{
+    background: gray;
+    border-radius: 80%/5%;
+}
+.Topic .topicDes > p::-webkit-scrollbar-button{
+    display: none;
+}
+
+.Topic .topicDes > h2{
     text-align: center;
 }
-.Topic > div > p{
-    color: C87C00;
-    margin-left: 5%;
-}
-.Topic > img{
-    width: 30%;
+
+
+
+
+
+
+.Topic .topicImg{
+    display: flex;
+    overflow-x: hidden;
+    width: 38%;
     height: 70%;
+}
+.Topic > button{
+    height: 7%;
+    width: 3%;
+
+    border-radius:50%;
+
+    background-color: #B7D5F4;
+    box-shadow: 2px 2px 5px #000000;
+
+    color: #81818168;
+    font-size: 1.7rem;
+    font-weight: 900;
+    line-height: 50%;
+}
+.Topic .topicImg > img{
+    width: 100%;
+    height: 100%;
     border-radius: 5%/5%;
 }
 
 
+
+
+
+
+.Topic.Left{
+    /* line given by Google Gemini */
+    @media(prefers-reduced-motion: no-preference){
+        transform: translate(-100%,0%);
+    }
+}
 .Topic.Left.Inter{
-    animation: moveTopicRight 1.5s;
+    animation: moveTopicRight 1.5s forwards;
 }
 
 @keyframes moveTopicRight{
-    from{
-        transform: translate(-75%,0);
-    }
     to{
         transform: translate(0,0);
     }
 }
 
+
+.Topic.Right{
+    @media(prefers-reduced-motion: no-preference){
+        transform: translate(100%,0%);
+    }
+}
 .Topic.Right.Inter{
-    animation: moveTopicLeft 1.5s;
+    animation: moveTopicLeft 1.5s forwards;
 }
 
 @keyframes moveTopicLeft{
-    from{
-        transform: translate(75%,0);
-    }
     to{
         transform: translate(0,0);
     }
 }
-
-
 
 
 
@@ -153,43 +229,70 @@ body{
     background-position: center;
     border-radius: 10%/15%;
 }
+
+
+
+
+
 .GameBox .details{
     background-color: #FBFDEA;
     width: 65%;
     height: 100%;
     border-radius: 2%/15%;
 }
+.GameBox .details > p{
+    height: 82%;
+    width: 94%;
+    overflow-y: auto;
+    margin: 2.5%
+}
+
+.GameBox .details > p::-webkit-scrollbar{
+    width: .45rem;
+    /* opacity though wooo */
+}
+.GameBox .details > p::-webkit-scrollbar-thumb{
+    background: gray;
+    border-radius: 80%/5%;
+}
+.GameBox .details > p::-webkit-scrollbar-button{
+    display: none;
+}
+
+
+
+
 
 .Game.one{
-    background-image: url("../thumbnailTTT.png");
+    background-image: url("./images/thumbnailTTT.png");
+    @media(prefers-reduced-motion: no-preference){
+        transform: translate(800%,0%);
+    }
 }
 .Game.one.Inter{
-    transform: translate(800%,0%);
     animation: moveStackedGames 1s forwards;
-    animation-timing-function: ease-out;
-    animation-delay: 0.2s;
 }
 .Game.two{
-    background-image: url("../thumbnailSI.png");
+    background-image: url("./images/thumbnailSI.png");
+    @media(prefers-reduced-motion: no-preference){
+        transform: translate(600%,0%);
+    }
 }
 .GameBox .area2{
     width: 35%;
     border-radius: 5%/20%;
 }
 .Game.two.Inter{
-    transform: translate(600%,0%);
     animation: moveStackedGames 1s forwards;
-    animation-timing-function: ease-out;
-    animation-delay: 0.4s;
 }
 .Game.three{
-    background-image: url("../thumbnailLL.png");
+    background-image: url("./images/thumbnailLL.png");
+    @media(prefers-reduced-motion: no-preference){
+        transform: translate(200%,0%);
+    }
 }
 .Game.three.Inter{
-    transform: translate(200%,0%);
     animation: moveStackedGames 1s forwards;
-    animation-timing-function: ease-out;
-    animation-delay: 0.6s;
 }
 
 @keyframes moveStackedGames{
@@ -213,7 +316,7 @@ body{
 
 /* this is where i left off 6-12-25 */
 .gameExitBox{
-    background-color:aliceblue;
+    background-color:#B7D5F4;
 
     width: 75%;
     height: 95%;
@@ -236,8 +339,16 @@ body{
     transform: scale(1) translate(-50%,-50%);
 }
 .gameExitBox #exitButton{
-    width: 20px;
-    height: 20px;
+    margin-left: auto;
+
+    background-color:#FBFDEA;
+    color: #E6A42A;
+    border: none;
+    font-size: 1.7rem;
+    font-weight: bold;
+
+    width: 5%;
+    height: 5%;
 }
 
 

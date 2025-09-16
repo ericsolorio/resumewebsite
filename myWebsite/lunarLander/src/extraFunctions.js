@@ -1,7 +1,9 @@
 import { Game } from "./game.js"
 import { Line } from "./line.js"
 
-
+// THIS IS THE WORK/MATH FOR THE S.A.T.
+// I UNDERSTOOD THE THEOREM BY Two-Bit Coding: https://www.youtube.com/watch?v=Zgf1DYrmSnk
+// THIS CODE FOR S.A.T WAS HEAVILY INSPIRED/INFLUENCED BY Qixotl LFC: https://www.youtube.com/watch?v=MvlhMEE9zuc 
 export function checkCollisionSAT(GAME, sc, lineStorage, tempLineStorage, scAndLeftPerp, scAndRightPerp, specificLine){
     //compare sc with left and right line
     //check dot product

@@ -1,3 +1,4 @@
+// THIS CLASS IS NOT USED IT WAS MADE FOR TESTING PURPOSES
 export class mousePointer{
     constructor(launchPad){
         this.launchPad = launchPad

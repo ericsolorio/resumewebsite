@@ -23,6 +23,21 @@ export class Line{
 
         // needs to be drawn multiple times because the canvas is cleared multiple times
 
+
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //EVERYONE STOP, THE ROTATING WAS ONLY POSSIBLE BC OF Luis Estrada FROM GAMEDEV.STACKEXCHANGE
+        // THE URL IS: https://gamedev.stackexchange.com/questions/67274/how-to-rotate-an-image-on-an-html5-canvas-without-rotating-the-whole-canvas 
+        // THIS IS VERY IMPORTANT
+        // DIRECT CODE FROM Luis Estrada AND HEAVILY INFLUENCED
+        // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        // THE CODE DOWN HERE
+        // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+
+
+
         launchPad.ctx.save()
         launchPad.ctx.translate(this.x, this.y)
         launchPad.ctx.rotate(this.angle * (Math.PI/180))

@@ -1,3 +1,10 @@
+// there is also credit in comments found throughout the code.
+
+
+
+
+
+
 // credit to how-can-i-get-an-elements-id-value-with-javascript,
 // on StackOverflow, Kamil Kiełczewski for passing variable and how to use "this", imhvost for idea of id.id
 // W3 schools: onclick Event, HTML <script> src Attribute, HTML Tables, JavaScript For Loops

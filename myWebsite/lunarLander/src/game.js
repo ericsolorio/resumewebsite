@@ -101,7 +101,8 @@ export class Game{
         
 
 
-        
+        // instead of checking all the lines with the spaceschip
+        // only two are checked at a time.
         
         
         if(this.sc.x > findMax(this.lineStorage[this.tempLineStorage["right"]].myVertices)){ 
@@ -134,8 +135,8 @@ export class Game{
 
         launchPad.ctx.fillText("speed: " + this.sc.speed.toFixed(1), 560, 50)
         launchPad.ctx.fillText("angle: " + this.sc.angle, 560, 80)
-        launchPad.ctx.fillText("x pos: " + this.sc.x.toFixed(1), 560, 110)
-        launchPad.ctx.fillText("y pos: " + this.sc.y.toFixed(1), 560, 140)
+        launchPad.ctx.fillText("x vel: " + this.sc.xVelocity.toFixed(1), 560, 110)
+        launchPad.ctx.fillText("y vel: " + this.sc.yVelocity.toFixed(1), 560, 140)
         
 
         /////////////////////////////////////////////////////////////////////////////////

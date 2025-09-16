@@ -71,3 +71,28 @@ export function getCollision(game, specificObj, className){
     })
     return theyCollided
 }
+
+
+
+export function getCollision2(game, specificObj, enemyBullet){
+    specificObj = game.mapObjects[specificObj]
+    let player = [...specificObj][0]
+
+    
+    let theyCollided = false
+    if(game.playerList.size > 0){
+        //orginal x and y are top left so must translate to center
+        if(enemyBullet.y + (enemyBullet.height/2) < (player.y + player.height/2) + (player.height/2)){
+            if(enemyBullet.y + (enemyBullet.height/2) > (player.y + player.height/2) - (player.height/2)){
+                if(enemyBullet.x < (player.x + player.width/2) + (player.width/2)){
+                    if(enemyBullet.x > (player.x + player.width/2) - (player.width/2)){
+                        game.mapObjects["Player"].delete(player)
+                        theyCollided = true
+                        return
+                    }
+                }
+            }
+        }
+    }    
+    return theyCollided
+}

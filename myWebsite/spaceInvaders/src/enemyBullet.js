@@ -1,4 +1,4 @@
-import { getCollision, deleteEnemyBullet } from "./functions.js"
+import { deleteEnemyBullet, getCollision2 } from "./functions.js"
 
 export default class EnemyBullet{
     constructor(){
@@ -12,7 +12,7 @@ export default class EnemyBullet{
     update(launchPad, game){
         //deletes bullet if it collides with player or 
         //bottom of screen
-        if(getCollision(game, this, "Player")){
+        if(getCollision2(game, "Player", this)){
             deleteEnemyBullet(game, this)
         }
         
