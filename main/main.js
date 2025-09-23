@@ -39,7 +39,7 @@ leftButtonFAITH.addEventListener("click", ()=>{
 
 rightButtonFAITH.addEventListener("click", ()=>{
     j -= 1
-    if(j >= -1){
+    if(j >= -2){
         let calcNum = j * 100
         faithImgs.forEach(img=>{
             img.animate([
