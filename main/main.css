@@ -159,6 +159,7 @@ body{
     width: 100%;
     height: 100%;
     border-radius: 5%/5%;
+    flex-shrink: 0;/* this line help from Google AI */
 }
 
 
